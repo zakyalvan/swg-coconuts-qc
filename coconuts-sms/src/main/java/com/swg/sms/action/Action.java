@@ -23,15 +23,6 @@ public interface Action extends ValidationAware, Parameterizable {
 	Format getFormatReceived();
 	
 	/**
-	 * Set format yang diterima oleh action. Lihat {@link #getFormatReceived()}.
-	 * Dalam method ini harus dicheck, apakah isi format (dari modelnya) apakah
-	 * sesuai dengan parameter yang diperlukan atau tidak.
-	 * 
-	 * @param format
-	 */
-	void setFormatReceived(Format format);
-	
-	/**
 	 * Enable/disable response untuk action ini secara keseluruhan.
 	 * Jika didisable disini, response untuk jenis event tertentu
 	 * diabaikan.

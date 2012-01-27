@@ -9,6 +9,7 @@ import java.util.Set;
  * Untuk masing-masing keyword, keyword value merupakan pattern
  * utama yang akan dibandingkan dengan string lain, apakah sesuai atau tidak.
  * 
+ * @see {@link SimpleKeyword}
  * @author zakyalvan
  */
 public interface Keyword extends Serializable {

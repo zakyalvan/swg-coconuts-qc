@@ -2,6 +2,12 @@ package com.swg.sms.action;
 
 import java.io.Serializable;
 
+/**
+ * Simple kelas dari object yang nampung format pesan masuk yang bisa dihandle
+ * untuk mengexecute action tertentu.
+ * 
+ * @author zakyalvan
+ */
 public final class Format implements Serializable {
 	private static final long serialVersionUID = -1107375968806033065L;
 	
@@ -10,7 +16,9 @@ public final class Format implements Serializable {
 	
 	public Format(String value) {
 		this.value = value;
+		this.model = FormatModel.decodeFromString(this.value);
 	}
+	
 	public FormatModel getModel() {
 		return model;
 	}
