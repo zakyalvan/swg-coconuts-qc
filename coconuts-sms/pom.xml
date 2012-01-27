@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>coconuts</artifactId>
+		<groupId>com.swg</groupId>
+		<version>1.0.0.SNAPSHOT</version>
+	</parent>
+	<artifactId>coconuts-sms</artifactId>
+	<name>Coconuts Sms Module</name>
+	
+	<dependencies>
+		<!-- Dependency ke modul internal dalam project -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>coconuts-core</artifactId>
+		</dependency>
+		
+		<!-- Dependency ke sms lib (Yang bekerja keras urusan sms :D) -->
+		<dependency>
+        	<groupId>org.smslib</groupId>
+        	<artifactId>smslib</artifactId>
+        	<version>3.5.1</version>
+        </dependency>
+	</dependencies>
+</project>
