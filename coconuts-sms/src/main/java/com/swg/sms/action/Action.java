@@ -12,6 +12,9 @@ import com.swg.sms.entity.InboundMessage;
 public interface Action extends ValidationAware {
 	Keyword getKeyword();
 	
+	Format getFormatReceived();
+	void setFormatReceived(Format format);
+	
 	boolean canExecute(InboundMessage message);
 	void execute(InboundMessage message) throws ActionException;
 }

@@ -181,6 +181,6 @@ public final class SimpleKeyword implements Keyword {
 	}
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		throw new RuntimeException("Object keyword tidak dapat di-clone.");
+		throw new CloneNotSupportedException("Object keyword tidak dapat di-clone.");
 	}
 }
