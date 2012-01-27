@@ -3,7 +3,7 @@ package com.swg.sms.action;
 import java.util.Set;
 
 /**
- * Bagian dari action untuk berurusan dengan parameter pesan.
+ * Bagian dari action untuk berurusan dengan parameter.
  * 
  * @author zakyalvan
  */
@@ -11,5 +11,5 @@ public interface Parameterizable {
 	Set<String> getParametersName();
 	Class<Parameter<?>> getParameterType(String name);
 	
-	void setParameter(Parameter<?> parameter);
+	void addParameter(Parameter<?> parameter);
 }

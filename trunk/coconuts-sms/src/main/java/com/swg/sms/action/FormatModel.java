@@ -1,6 +1,11 @@
 package com.swg.sms.action;
 
 import java.io.Serializable;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.log4j.Logger;
 
 /**
  * Ini representasi dari format sms yang dimengerti oleh system.
@@ -17,19 +22,30 @@ import java.io.Serializable;
 public final class FormatModel implements Serializable {
 	private static final long serialVersionUID = -5492323427440482670L;
 	
+	public static final Pattern VALID_PATTERN = Pattern.compile("");
 	public static final String DELIMITER = " ";
+	
+	private Logger logger = Logger.getLogger(getClass());
 	
 	private Integer partsCount = 0;
 	private Integer parametersCount = 0;
 	
 	private String format;
 	
-	public FormatModel(String format) {
-		this.format = format;
+	private FormatModel() {}
+	
+	public static final FormatModel decodeFromString(String format) {
+		if(format == null || format.length() == 0)
+			throw new IllegalArgumentException("Format parameter should not be null or zero length string.");
 		
-		/**
-		 * Parsing format di sini.
-		 */
+		Matcher validPatternMatcher = VALID_PATTERN.matcher(format);
+		
+		FormatModel formatModel = new FormatModel();
+		while(validPatternMatcher.find()) {
+			
+		}
+			
+		return formatModel;
 	}
 	
 	/**
@@ -59,6 +75,15 @@ public final class FormatModel implements Serializable {
 	 */
 	public Integer countParameters() {
 		return parametersCount;
+	}
+	
+	/**
+	 * Retrieve parameter name yang terdefinisi dalam format.
+	 * 
+	 * @return
+	 */
+	public Set<String> getParametersName() {
+		return null;
 	}
 	
 	public String getParameterNameAt(Integer index) {
