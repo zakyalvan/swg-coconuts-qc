@@ -39,7 +39,6 @@ public class InboundMessageBean implements InboundMessage {
 		this.sender = sender;
 	}
 	
-	@Override
 	public String getContent() {
 		return content;
 	}

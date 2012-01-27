@@ -3,7 +3,12 @@ package com.swg.sms.action;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class AbstractAction {
+/**
+ * Ini base class untuk action.
+ * 
+ * @author zakyalvan
+ */
+public abstract class AbstractAction implements Action {
 	protected String key;
 	protected String keyPattern;
 	protected Set<String> requiredParameterNames = new HashSet<String>();
