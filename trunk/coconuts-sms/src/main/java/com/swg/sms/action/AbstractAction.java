@@ -1,5 +1,6 @@
 package com.swg.sms.action;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,7 +9,6 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.swg.sms.action.param.Parameter;
-import com.swg.sms.entity.InboundMessage;
 
 /**
  * Ini base class untuk action.
@@ -25,13 +25,13 @@ public abstract class AbstractAction implements Action {
 	protected final Keyword keyword;
 	protected final Format format;
 	
-	protected Set<Parameter<?>> parameters = new HashSet<Parameter<?>>();
+	protected final Set<Parameter<?>> parameters = new HashSet<Parameter<?>>();
 	
 	/**
 	 * Map antara nama parameter yang diperlukan dengan jenis dari parameter tersebut.
 	 */
-	private Map<String, Class<Parameter<?>>> parametersTypeMap = 
-		new HashMap<String, Class<Parameter<?>>>();
+	private Map<String, Class<? extends Parameter<?>>> parametersTypeMap = 
+		new HashMap<String, Class<? extends Parameter<?>>>();
 	
 	protected boolean responseEnabled = true;
 
@@ -52,9 +52,9 @@ public abstract class AbstractAction implements Action {
 	/**
 	 * Configure parameter type mapping, mapping antara nama parameter dan typenya.
 	 * 
-	 * @param parametersTypeMap
+	 * @param parametersTypeMap2
 	 */
-	protected abstract void configureParameterTypeMap(Map<String, Class<Parameter<?>>> parametersTypeMap);
+	protected abstract void configureParameterTypeMap(Map<String, Class<? extends Parameter<?>>> parametersTypeMap2);
 	
 	/**
 	 * Validasi format pesan yang dibuat, apakah sesuai dengan parameter yang diperlukan
@@ -131,15 +131,34 @@ public abstract class AbstractAction implements Action {
 		return new HashSet<String>(parametersTypeMap.keySet());
 	}
 
-	public Class<Parameter<?>> getParameterType(String name) {
+	public Class<? extends Parameter<?>> getParameterType(String name) {
 		if(parametersTypeMap.containsKey(name)) {
 			return parametersTypeMap.get(name);
 		}
 		return null;
 	}
 
-	public void addParameter(Parameter<?> parameter) {
+	protected Parameter<?> getParameter(String name) {
+		Parameter<?> parameter = null;
+		// Di loop biar bisa ignore case.
+		for(Parameter<?> p : parameters) {
+			if(p.getName().equalsIgnoreCase(name)) {
+				parameter = p;
+			}
+		}
 		
+		if(parameter == null)
+			throw new IllegalArgumentException("Parameter dengan name " + name + " tidak ditemukan dalam " + parameters);
+		
+		return parameter;
+	}
+	
+	public void addParameter(Parameter<?> parameter) {
+		this.parameters.add(parameter);
+	}
+	@Override
+	public void setParameters(Collection<Parameter<?>> parameters) {
+		this.parameters.addAll(parameters);
 	}
 
 	public Keyword getKeyword() {
@@ -164,9 +183,5 @@ public abstract class AbstractAction implements Action {
 		return false;
 	}
 
-	public boolean canExecute(InboundMessage message) {
-		return false;
-	}
-
-	public abstract void execute(InboundMessage message) throws ActionException;
+	public abstract void execute() throws ActionException;
 }

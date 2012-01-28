@@ -22,7 +22,7 @@ import com.swg.sms.action.param.StringParameter;
 public class SimpleParser implements Parser {
 	private Logger logger = Logger.getLogger(getClass());
 	
-	private String delimiter = DEFAULT_DELIMITER;
+	private String delimiter = " ";
 	
 	public SimpleParser() {}
 	public SimpleParser(String delimiter) {
@@ -36,7 +36,13 @@ public class SimpleParser implements Parser {
 	@Override
 	public Result parse(String payload, Format format) throws ParsingException {
 		logger.info("Parsing message payload.");
+		
+		/**
+		 * TODO Perbaiki cara split ini. Misalnya, split parameter string yang berspasi.
+		 */
 		String[] payloadParts = payload.split(delimiter);
+		
+		logger.debug("Payload parts length : " + payloadParts.length);
 		if(payloadParts.length != format.getModel().countParameters()+1) {
 			/**
 			 * TODO Extends functionality di sini.
@@ -49,13 +55,14 @@ public class SimpleParser implements Parser {
 		Set<Parameter<?>> parameters = new HashSet<Parameter<?>>();
 		for(int i = 1; i <= payloadParts.length; i++) {
 			if(format.getModel().getKeywordPosition() == i) {
-				keyword = payloadParts[i];
+				keyword = payloadParts[i-1];
 			}
 			else {
 				String parameterName = format.getModel().getParameterNameAt(i);
-				String parameterValue = payloadParts[i];
+				String parameterValue = payloadParts[i-1];
 				Class<? extends Parameter<?>> parameterType = format.getModel().getParameterTypeAt(i);
 				
+				logger.debug("Process parameter ("+parameterName+") with raw value " + parameterValue);
 				if(StringParameter.class.isAssignableFrom(parameterType)) {
 					StringParameter stringParameter = new StringParameter(parameterName, parameterValue);
 					parameters.add(stringParameter);
@@ -77,13 +84,18 @@ public class SimpleParser implements Parser {
 					}
 				}
 				else if(MapParameter.class.isAssignableFrom(parameterType)) {
-					
+					/**
+					 * TODO Implementasi buat map parameter.
+					 */
 				}
 				else {
 					throw new ParsingException("Parameter type ("+parameterType+") tidak dikenali.", this);
 				}
 			}
 		}
-		return new Result(keyword, parameters);
+		Result result = new Result(keyword, parameters);
+		
+		logger.info("Parsing result : " + result);
+		return result;
 	}
 }

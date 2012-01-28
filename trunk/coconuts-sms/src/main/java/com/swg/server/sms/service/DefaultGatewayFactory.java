@@ -18,7 +18,6 @@ import com.swg.server.sms.entity.SerialGatewayInfo;
  * 
  * @author zakyalvan
  */
-@Component
 public class DefaultGatewayFactory implements GatewayFactory<AGateway>, InitializingBean {
 	private Logger logger = Logger.getLogger(getClass());
 	private Set<GatewayFactory<? extends AGateway>> delegates = new HashSet<GatewayFactory<? extends AGateway>>();

@@ -1,5 +1,7 @@
 package com.swg.sms.processor;
 
+import java.util.Collection;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,7 +9,10 @@ import org.springframework.stereotype.Component;
 import com.swg.sms.action.Action;
 import com.swg.sms.action.ActionStack;
 import com.swg.sms.action.ActionStackFactory;
+import com.swg.sms.action.Format;
 import com.swg.sms.action.Parser;
+import com.swg.sms.action.ParsingException;
+import com.swg.sms.action.param.Parameter;
 import com.swg.sms.entity.InboundMessage;
 
 /**
@@ -54,15 +59,32 @@ public class MessageProcessorImpl implements MessageProcessor {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected void doProcess(InboundMessage inboundMessage) {
 		logger.info("Process pesan masuk.");
 		
 		ActionStack actionStack = actionStackFactory.create();
+		boolean executed = false;
 		while(!actionStack.empty()) {
 			Action action = actionStack.pop();
-			if(action.canExecute(inboundMessage)) {
-				action.execute(inboundMessage);
+			Format format = action.getFormatReceived();
+			
+			try {
+				logger.info("Try to parse message.");
+				Parser.Result result = parser.parse(inboundMessage.getContent(), format);
+				
+				action.setParameters((Collection<Parameter<?>>) result.getParameters());
+				action.execute();
+				executed = true;
 			}
+			catch(ParsingException parsingException) {
+				// Disini message-processing-exception tidak dilempar, biar action berikutnya bisa dieksekusi.
+				logger.error("Action ("+action+") tidak dapat memparsing content sms. Coba dengan action yang lain.", parsingException);
+			}
+		}
+		if(!executed) {
+			logger.error("Format pesan masuk invalid, tidak ada action yang sesuai untuk dieksekusi.");
+			throw new MessageProcessingException("Format pesan masuk invalid, tidak ada action yang sesuai untuk dieksekusi.", 1);
 		}
 	}
 }

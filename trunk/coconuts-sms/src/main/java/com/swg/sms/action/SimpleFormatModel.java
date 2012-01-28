@@ -157,12 +157,16 @@ public final class SimpleFormatModel implements FormatModel, Serializable {
 	}
 	
 	public String getParameterNameAt(Integer position) {
-		if(parameterInfoMap.keySet().size() < position) {
+		logger.debug("Retrieve parameter name at position : " + position);
+		
+		// Tambah satu, yaitu posisi keyword.
+		if(parameterInfoMap.keySet().size()+1 < position) {
 			throw new IndexOutOfBoundsException("Posisi yang diminta lebih besar dari jumlah parameter yang ada.");
 		}
 		
 		String parameterName = null;
 		for(ParameterInfo parameterInfo : parameterInfoMap.values()) {
+			logger.debug("Parameter in loop : " + parameterInfo);
 			if(parameterInfo.getPosition() == position) {
 				parameterName = parameterInfo.getName();
 			}
@@ -184,12 +188,15 @@ public final class SimpleFormatModel implements FormatModel, Serializable {
 	}
 	
 	public Class<? extends Parameter<?>> getParameterTypeAt(Integer position) {
-		if(parameterInfoMap.keySet().size() < position) {
+		// Tambah satu, yaitu posisi keyword.
+		if(parameterInfoMap.keySet().size()+1 < position) {
 			throw new IndexOutOfBoundsException("Posisi yang diminta lebih besar dari jumlah parameter yang ada.");
 		}
 		
+		logger.debug("Retrieve parameter type at position : " + position);
 		Class<? extends Parameter<?>> parameterType = null;
 		for(ParameterInfo parameterInfo : parameterInfoMap.values()) {
+			logger.debug("Item in loop : " + parameterInfo);
 			if(parameterInfo.getPosition() == position) {
 				parameterType = parameterInfo.getType();
 			}

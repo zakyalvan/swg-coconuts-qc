@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * 
  * @author zakyalvan
  */
-@Entity
+@Entity(name="SetanAlas")
 @Table(name="inbound_message")
 public class InboundMessageBean implements InboundMessage {
 	private static final long serialVersionUID = -1393692240111385797L;

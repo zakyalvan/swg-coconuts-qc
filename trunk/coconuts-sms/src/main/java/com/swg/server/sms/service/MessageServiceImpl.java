@@ -39,7 +39,6 @@ import com.swg.server.sms.service.GatewayFactory.CantCreateGatewayException;
  * 
  * @author zakyalvan
  */
-@Service("messageService")
 public class MessageServiceImpl implements GatewayManager<GatewayInfo>, MessageService, InitializingBean, ApplicationEventPublisherAware {
 	private Logger logger = Logger.getLogger(getClass());
 	
