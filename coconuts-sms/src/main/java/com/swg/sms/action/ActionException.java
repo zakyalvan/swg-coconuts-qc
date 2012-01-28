@@ -9,9 +9,9 @@ public class ActionException extends RuntimeException {
 	private static final long serialVersionUID = -6963324075113801446L;
 	
 	protected int code;
-	protected ParameterizableAction action;
+	protected Action action;
 	
-	public ActionException(String message, int code, ParameterizableAction action) {
+	public ActionException(String message, int code, Action action) {
 		super(message);
 		assert(action != null) : "Parameter action tidak boleh null.";
 		
@@ -22,7 +22,7 @@ public class ActionException extends RuntimeException {
 	public int getCode() {
 		return code;
 	}
-	public ParameterizableAction getAction() {
+	public Action getAction() {
 		return action;
 	}
 }
