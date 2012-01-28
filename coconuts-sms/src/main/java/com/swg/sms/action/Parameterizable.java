@@ -1,5 +1,6 @@
 package com.swg.sms.action;
 
+import java.util.Collection;
 import java.util.Set;
 
 import com.swg.sms.action.param.Parameter;
@@ -11,7 +12,8 @@ import com.swg.sms.action.param.Parameter;
  */
 public interface Parameterizable {
 	Set<String> getParametersName();
-	Class<Parameter<?>> getParameterType(String name);
+	Class<? extends Parameter<?>> getParameterType(String name);
 	
 	void addParameter(Parameter<?> parameter);
+	void setParameters(Collection<Parameter<?>> parameters);
 }

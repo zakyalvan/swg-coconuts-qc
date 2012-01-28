@@ -1,6 +1,5 @@
 package com.swg.sms.action;
 
-import com.swg.sms.entity.InboundMessage;
 
 /**
  * Kontrak dasar untu aksi yang bisa didispatch menggunakan pesan sms
@@ -57,13 +56,5 @@ public interface Action extends ValidationAware, Parameterizable {
 	 */
 	boolean isResponseEnabledFor(int code);
 	
-	/**
-	 * Check apakah action ini dapat dieksekusi berdasarkan pesan masuk
-	 * yang terima.
-	 * 
-	 * @param message
-	 * @return
-	 */
-	boolean canExecute(InboundMessage message);
-	void execute(InboundMessage message) throws ActionException;
+	void execute() throws ActionException;
 }

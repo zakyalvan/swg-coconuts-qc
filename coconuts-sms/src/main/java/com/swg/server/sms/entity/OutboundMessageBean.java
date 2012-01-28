@@ -20,7 +20,7 @@ import javax.persistence.Version;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Entity
+@Entity(name="SetanGunung")
 @Table(name="outbound_message")
 public class OutboundMessageBean implements OutboundMessage {
 	private static final long serialVersionUID = 7244159795217586813L;
