@@ -11,6 +11,10 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 
 import com.swg.sms.action.Format.FormatModel;
+import com.swg.sms.action.param.MapParameter;
+import com.swg.sms.action.param.NumberParameter;
+import com.swg.sms.action.param.Parameter;
+import com.swg.sms.action.param.StringParameter;
 
 /**
  * Ini representasi dari format sms yang dimengerti oleh system.
@@ -31,9 +35,6 @@ public final class SimpleFormatModel implements FormatModel, Serializable {
 	
 	public static final Pattern VALID_FORMAT_PATTERN = 
 			Pattern.compile("(\\G\\s*?\\{\\s*?(([keyword]{6,8}?)|([parmet]{8,10}\\s*?:\\s*?(string|number|map){1}\\s*?:\\s*?(\\w*?){1}))\\s*?\\}\\s*?)\\1*?");
-	
-	public static final String DEFAULT_START_TAG = "{";
-	public static final String DEFAULT_END_TAG = "}";
 	
 	@SuppressWarnings("unchecked")
 	public static final SimpleFormatModel decodeFromString(String format) {

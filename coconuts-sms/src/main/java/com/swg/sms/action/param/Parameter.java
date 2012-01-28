@@ -1,4 +1,4 @@
-package com.swg.sms.action;
+package com.swg.sms.action.param;
 
 public interface Parameter<T> {
 	String getName();

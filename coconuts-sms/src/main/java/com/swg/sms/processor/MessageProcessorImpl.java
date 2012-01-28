@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.swg.sms.action.Action;
 import com.swg.sms.action.ActionStack;
 import com.swg.sms.action.ActionStackFactory;
+import com.swg.sms.action.Parser;
 import com.swg.sms.entity.InboundMessage;
 
 /**
@@ -21,6 +22,9 @@ public class MessageProcessorImpl implements MessageProcessor {
 	
 	@Autowired(required=true)
 	protected ActionStackFactory actionStackFactory;
+	
+	@Autowired(required=true)
+	protected Parser parser;
 	
 	protected MessageProcessingCallback messageProcessorCallback = MessageProcessingCallback.DUMB;
 	
