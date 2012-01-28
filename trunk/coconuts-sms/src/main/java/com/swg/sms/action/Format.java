@@ -1,6 +1,7 @@
 package com.swg.sms.action;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Simple kelas dari object yang nampung format pesan masuk yang bisa dihandle
@@ -8,17 +9,55 @@ import java.io.Serializable;
  * 
  * @author zakyalvan
  */
-public final class Format implements Serializable {
-	private static final long serialVersionUID = -1107375968806033065L;
-	
-	private String value;
-	private FormatModel model;
-	
-	public Format(String value) {
-		this.value = value;
-		this.model = FormatModel.decodeFromString(this.value);
+public abstract class Format implements Serializable {
+	public interface FormatModel {
+		public String getFormatString();
+		
+		/**
+		 * Retrieve position dari keyword.
+		 * Index ini ditentukan setelah format di split menjadi beberapa bagian
+		 * (token format) dan displit berdasarkan delimiter.
+		 * 
+		 * @return Integer
+		 */
+		public Integer getKeywordPosition();
+		
+		/**
+		 * Count seluruh parameter yang didefinisikan dalam format.
+		 * 
+		 * @return
+		 */
+		public Integer countParameters();
+		/**
+		 * Retrieve parameter name yang terdefinisi dalam format.
+		 * 
+		 * @return
+		 */
+		public Set<String> getParametersName();
+		public String getParameterNameAt(Integer position);
+		public Integer getParameterPosition(String name);
+		public Class<? extends Parameter<?>> getParameterTypeAt(Integer position);
+		public Class<? extends Parameter<?>> getParameterTypeFor(String name);
 	}
 	
+	private static final long serialVersionUID = -1107375968806033065L;
+	
+	protected final String value;
+	protected final FormatModel model;
+	
+	public Format(String value) {
+		if(value == null || value.trim().length() ==0)
+			throw new IllegalArgumentException("Parameter format value should not be null or zero length string.");
+		
+		this.value = value;
+		this.model = createModel(value);
+	}
+	
+	protected abstract FormatModel createModel(String value);
+
+	public String getValue() {
+		return value;
+	}
 	public FormatModel getModel() {
 		return model;
 	}

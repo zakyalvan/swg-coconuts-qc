@@ -77,8 +77,8 @@ public abstract class AbstractAction implements Action {
 				if(parameterName.equalsIgnoreCase(nameInFormat)) {
 					parametersName.remove(parameterName);
 					
-					Class<Parameter<?>> typeInFormat = format.getModel().getParameterTypeFor(parameterName);
-					Class<Parameter<?>> typeRequired = parametersTypeMap.get(parameterName);
+					Class<? extends Parameter<?>> typeInFormat = format.getModel().getParameterTypeFor(parameterName);
+					Class<? extends Parameter<?>> typeRequired = parametersTypeMap.get(parameterName);
 					if(!typeInFormat.isAssignableFrom(typeRequired)) {
 						String errorMessage = "Parameter type (for parameter name : "+parameterName+") " +
 								"defined in format ("+typeInFormat+") not match with required parameter type ("+typeRequired+")";
