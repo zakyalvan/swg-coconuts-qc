@@ -1,4 +1,4 @@
-package com.swg.sms.action;
+package com.swg.sms.action.param;
 
 import java.util.Map;
 

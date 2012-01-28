@@ -3,6 +3,8 @@ package com.swg.sms.action;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.swg.sms.action.param.Parameter;
+
 /**
  * Simple kelas dari object yang nampung format pesan masuk yang bisa dihandle
  * untuk mengexecute action tertentu.
@@ -11,7 +13,7 @@ import java.util.Set;
  */
 public abstract class Format implements Serializable {
 	public interface FormatModel {
-		public String getFormatString();
+		String getFormatString();
 		
 		/**
 		 * Retrieve position dari keyword.
@@ -20,27 +22,30 @@ public abstract class Format implements Serializable {
 		 * 
 		 * @return Integer
 		 */
-		public Integer getKeywordPosition();
+		Integer getKeywordPosition();
 		
 		/**
 		 * Count seluruh parameter yang didefinisikan dalam format.
 		 * 
 		 * @return
 		 */
-		public Integer countParameters();
+		Integer countParameters();
 		/**
 		 * Retrieve parameter name yang terdefinisi dalam format.
 		 * 
 		 * @return
 		 */
-		public Set<String> getParametersName();
-		public String getParameterNameAt(Integer position);
-		public Integer getParameterPosition(String name);
-		public Class<? extends Parameter<?>> getParameterTypeAt(Integer position);
-		public Class<? extends Parameter<?>> getParameterTypeFor(String name);
+		Set<String> getParametersName();
+		String getParameterNameAt(Integer position);
+		Integer getParameterPosition(String name);
+		Class<? extends Parameter<?>> getParameterTypeAt(Integer position);
+		Class<? extends Parameter<?>> getParameterTypeFor(String name);
 	}
 	
 	private static final long serialVersionUID = -1107375968806033065L;
+	
+	public static final String DEFAULT_START_TAG = "{";
+	public static final String DEFAULT_END_TAG = "}";
 	
 	protected final String value;
 	protected final FormatModel model;
@@ -58,7 +63,7 @@ public abstract class Format implements Serializable {
 	public String getValue() {
 		return value;
 	}
-	public FormatModel getModel() {
+	public final FormatModel getModel() {
 		return model;
 	}
 	
