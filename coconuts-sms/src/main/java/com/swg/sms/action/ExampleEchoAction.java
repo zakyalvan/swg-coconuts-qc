@@ -1,5 +1,6 @@
 package com.swg.sms.action;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -28,6 +29,12 @@ public class ExampleEchoAction extends AbstractAction {
 		logger.info("Yang dikirim dari user : " + getParameter("echoContent"));
 		logger.info("========================================= End : Exceute echo action.");
 		
+		try {
+			
+			Runtime.getRuntime().exec("notepad");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

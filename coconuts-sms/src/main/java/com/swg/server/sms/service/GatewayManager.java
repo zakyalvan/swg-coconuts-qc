@@ -2,7 +2,7 @@ package com.swg.server.sms.service;
 
 import java.util.Set;
 
-import com.swg.server.sms.entity.GatewayInfo;
+import com.swg.sms.entity.GatewayInfo;
 
 /**
  * Kontrak untuk gateway messaging management.

@@ -5,9 +5,8 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
-import com.swg.server.sms.entity.InboundMessage;
-import com.swg.server.sms.entity.InboundMessageBean;
-import com.swg.server.sms.repo.InboundMessageRepository;
+import com.swg.sms.entity.InboundMessageBean;
+import com.swg.sms.entity.repo.InboundMessageRepository;
 
 /**
  * Kontrak untuk messaging service, inbound dan outbound.
@@ -66,15 +65,6 @@ public interface MessageService {
 	 * @return {@link InboundMessageRepository}
 	 */
 	InboundMessageRepository getInboundMessageRepository();
-	
-	/**
-	 * Set strategy pemrosesan pesan masuk.
-	 * Processor ini akan dieksekusi pada saat ada notifikasi pesan masuk baru.
-	 * Atau pada saat ada pesan yg valid namun gagal diproses.
-	 * 
-	 * @param {@link MessageProcessor} processor
-	 */
-	void setInboundMessageProcessor(MessageProcessor<InboundMessage> processor);
 	
 	
 	/**

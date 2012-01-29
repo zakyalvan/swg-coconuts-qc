@@ -103,7 +103,7 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 		
 		if(!OutboundMessageBean.class.isAssignableFrom(outboundMessage.getClass())) {
 			outboundMessage = new OutboundMessageBean(
-					outboundMessage.getReceiver(), 
+					outboundMessage.getRecipient(), 
 					outboundMessage.getContent());
 		}
 		
@@ -123,7 +123,7 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 		
 		outMessage.setId(outboundMessage.toString());
 		outMessage.setText(outboundMessage.getContent());
-		outMessage.setRecipient(outboundMessage.getReceiver());
+		outMessage.setRecipient(outboundMessage.getRecipient());
 		
 		service.queueMessage(outMessage);
 	}

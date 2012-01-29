@@ -23,15 +23,13 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.stereotype.Service;
 
-import com.swg.server.sms.entity.GatewayInfo;
-import com.swg.server.sms.entity.InboundMessage;
-import com.swg.server.sms.entity.InboundMessageBean;
-import com.swg.server.sms.entity.SerialGatewayInfo;
-import com.swg.server.sms.repo.GatewayInfoRepository;
-import com.swg.server.sms.repo.InboundMessageRepository;
 import com.swg.server.sms.service.GatewayFactory.CantCreateGatewayException;
+import com.swg.sms.entity.GatewayInfo;
+import com.swg.sms.entity.InboundMessageBean;
+import com.swg.sms.entity.SerialGatewayInfo;
+import com.swg.sms.entity.repo.GatewayInfoRepository;
+import com.swg.sms.entity.repo.InboundMessageRepository;
 
 /**
  * Implementasi default dari kelas {@link MessageService}.
@@ -46,9 +44,6 @@ public class MessageServiceImpl implements GatewayManager<GatewayInfo>, MessageS
 	
 	@Autowired(required=true)
 	private InboundMessageRepository inboundMessageRepository;
-	
-	//@Autowired(required=true)
-	private MessageProcessor<InboundMessage> inboundMessageProcessor;
 	
 	@Autowired(required=true)
 	private GatewayInfoRepository gatewayInfoRepository;
@@ -254,11 +249,6 @@ public class MessageServiceImpl implements GatewayManager<GatewayInfo>, MessageS
 		return inboundMessageRepository;
 	}
 
-	@Override
-	public void setInboundMessageProcessor(MessageProcessor<InboundMessage> inboundMessageProcessor) {
-		this.inboundMessageProcessor = inboundMessageProcessor;
-	}
-
 
 	@Override
 	public InboundMessageBean getInboundMessage(Long id) {
@@ -309,21 +299,21 @@ public class MessageServiceImpl implements GatewayManager<GatewayInfo>, MessageS
 				logger.info("Pesan masuk baru diterima, catat dalam database.");
 				
 				GatewayInfo gatewayInfo = gatewayInfoRepository.findOne(msg.getGatewayId());
-				InboundMessageBean inboundMessage = new InboundMessageBean(msg.getText(), msg.getOriginator(), gatewayInfo, msg.getSmscNumber(), msg.getDate(), InboundMessage.Status.NEW);
+				//InboundMessageBean inboundMessage = new InboundMessageBean(msg.getText(), msg.getOriginator(), gatewayInfo, msg.getSmscNumber(), msg.getDate(), InboundMessage.Status.NEW);
 
-				logger.info("Message yang diterima : " + inboundMessage);
-				try {
-					gateway.deleteMessage(msg);
-					inboundMessageRepository.saveAndFlush(inboundMessage);
-				} catch (TimeoutException e) {
-					e.printStackTrace();
-				} catch (GatewayException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+//				logger.info("Message yang diterima : " + inboundMessage);
+//				try {
+//					gateway.deleteMessage(msg);
+//					inboundMessageRepository.saveAndFlush(inboundMessage);
+//				} catch (TimeoutException e) {
+//					e.printStackTrace();
+//				} catch (GatewayException e) {
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
 			}
 		}
 	}
