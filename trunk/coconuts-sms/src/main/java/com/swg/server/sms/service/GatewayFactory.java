@@ -2,7 +2,7 @@ package com.swg.server.sms.service;
 
 import org.smslib.AGateway;
 
-import com.swg.server.sms.entity.GatewayInfo;
+import com.swg.sms.entity.GatewayInfo;
 
 /**
  * Builder untuk gateway yang sesungguhnya, 

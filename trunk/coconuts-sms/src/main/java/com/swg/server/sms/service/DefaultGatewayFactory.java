@@ -9,8 +9,8 @@ import org.smslib.modem.SerialModemGateway;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
-import com.swg.server.sms.entity.GatewayInfo;
-import com.swg.server.sms.entity.SerialGatewayInfo;
+import com.swg.sms.entity.GatewayInfo;
+import com.swg.sms.entity.SerialGatewayInfo;
 
 /**
  * Implementasi default dari {@link GatewayFactory},

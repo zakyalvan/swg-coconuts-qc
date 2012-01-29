@@ -1,6 +1,6 @@
 package com.swg.server.sms.service;
 
-import com.swg.server.sms.entity.GatewayInfo;
+import com.swg.sms.entity.GatewayInfo;
 
 public class SmslibServiceConfigurer {
 	public void configure() {

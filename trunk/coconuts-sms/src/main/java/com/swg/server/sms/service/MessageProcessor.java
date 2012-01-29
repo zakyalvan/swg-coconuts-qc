@@ -1,6 +1,6 @@
 package com.swg.server.sms.service;
 
-import com.swg.server.sms.entity.Message;
+import org.aspectj.bridge.Message;
 
 /**
  * Kontrak untuk stategy pemrosesan pesan.

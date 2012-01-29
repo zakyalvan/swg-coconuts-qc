@@ -1,5 +1,7 @@
 package com.swg.sms.entity;
 
+import java.util.Date;
+
 /**
  * Kontrak untuk pesan masuk.
  * 
@@ -36,8 +38,12 @@ public interface InboundMessage {
 	public static final Integer REPROCESS_MESSAGE = 5;
 	
 	Integer getId();
+	GatewayInfo getGatewayInfo();
 	String getSender();
+	String getServiceCenter();
 	String getContent();
+	Date getReceiveDate();
 	Integer getStatus();
 	void setStatus(Integer status);
+	Date getVersion();
 }

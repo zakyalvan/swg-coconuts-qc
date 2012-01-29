@@ -1,6 +1,6 @@
 package com.swg.server.sms.service;
 
-import com.swg.server.sms.entity.InboundMessage;
+import com.swg.sms.entity.InboundMessage;
 
 /**
  * Exception yang dilempar pada saat parser tidak dapat meparse pesan masuk.
