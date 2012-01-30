@@ -6,10 +6,10 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/.generated-apt"/>
-        <dependent-module archiveName="coconuts-core-1.0.0.SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/coconuts-core/coconuts-core">
+        <dependent-module archiveName="coconuts-core-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/coconuts-core/coconuts-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="coconuts-sms-1.0.0.SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/coconuts-sms/coconuts-sms">
+        <dependent-module archiveName="coconuts-sms-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/coconuts-sms/coconuts-sms">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="coconuts-webapp"/>
