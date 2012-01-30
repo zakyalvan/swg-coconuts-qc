@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>coconuts</artifactId>
 		<groupId>com.swg</groupId>
-		<version>1.0.0.SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>coconuts-webapp</artifactId>
 	<packaging>war</packaging>
@@ -233,7 +233,7 @@
 					<runTarget>/index.html</runTarget>
 					<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
 					<modules>
-						<module>${project.groupId}.QuickCount</module>
+						<module>${project.groupId}.web.QuickCount</module>
 					</modules>
 					<copyWebapp>true</copyWebapp>
 				</configuration>
