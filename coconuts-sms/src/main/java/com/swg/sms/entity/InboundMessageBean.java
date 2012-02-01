@@ -43,6 +43,7 @@ public class InboundMessageBean implements InboundMessage {
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="receive_data")
 	private Date receiveDate;
 	
 	@NotNull
@@ -50,6 +51,7 @@ public class InboundMessageBean implements InboundMessage {
 	private Integer status;
 	
 	@Version
+	@Column(name="version")
 	private Timestamp version;
 	
 	public InboundMessageBean() {}

@@ -1,4 +1,4 @@
-package com.swg.sms.action;
+package com.swg.sms.format;
 
 import java.io.Serializable;
 import java.util.Set;

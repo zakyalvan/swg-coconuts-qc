@@ -81,8 +81,15 @@
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="persistenceUnitName" value="persistenceUnit"/>
         <property name="dataSource" ref="dataSource"/>
+
+        <!-- Tambahin property untuk pe-register andditional entity. Ini diperlukan jika entity tambahan didefinisiin diluar module core. -->
+        <property name="persistenceUnitPostProcessors">
+        	<array>
+        		<ref bean="smsEntityRegisterar" />
+        	</array>
+        </property>
     </bean>
     
-    <jpa:repositories base-package="com.swg.core" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager">
+    <jpa:repositories base-package="com.swg" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager">
 	</jpa:repositories>
 </beans>

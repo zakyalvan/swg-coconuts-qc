@@ -1,5 +1,7 @@
 package com.swg.sms.action;
 
+import com.swg.sms.format.Format;
+
 
 /**
  * Kontrak dasar untu aksi yang bisa didispatch menggunakan pesan sms

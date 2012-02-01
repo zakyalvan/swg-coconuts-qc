@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>coconuts</artifactId>
 		<groupId>com.swg</groupId>
-		<version>1.0.0.SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>coconuts-sms</artifactId>
 	<name>Coconuts Sms Module</name>

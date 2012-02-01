@@ -16,6 +16,8 @@ import org.smslib.TimeoutException;
 import org.smslib.modem.SerialModemGateway;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +36,7 @@ import com.swg.sms.processor.MessageProcessor;
  * @author zakyalvan
  */
 @Service
-public class MessagingService implements MessageProcessingService, ServiceLifecycleManager, InitializingBean {
+public class MessagingService implements MessageProcessingService, ServiceLifecycleManager, InitializingBean, ApplicationEventPublisherAware {
 	private Logger logger = Logger.getLogger(MessagingService.class);
 	
 	private org.smslib.Service service = org.smslib.Service.getInstance();
@@ -47,6 +49,8 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 	
 	@Autowired(required=true)
 	private OutboundMessageRepository outboundMessageRepository;
+	
+	private ApplicationEventPublisher applicationEventPublisher;
 	
 	public void reprocessMessage(InboundMessage inboundMessage) {
 		logger.info("Reproses message.");
@@ -132,7 +136,7 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 	}
 	
 	@Scheduled(fixedDelay=5000)
-	void checkAndProcessInboundMessage() {
+	synchronized void checkAndProcessInboundMessage() {
 		logger.info("Check and process inbound message.");
 		
 		if(inboundMessageRepository.countNewMessages() > 0) {
@@ -145,7 +149,7 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 		}
 	}
 	@Scheduled(fixedDelay=5000)
-	void checkAndProcessOutboundMessage() {
+	synchronized void checkAndProcessOutboundMessage() {
 		logger.info("Check and process outbound message.");
 		if(outboundMessageRepository.countNewMessages() > 0) {
 			List<OutboundMessage> outboundMessages = outboundMessageRepository.findAllByStatus(OutboundMessage.NEW_MESSAGE);
@@ -243,5 +247,9 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 		logger.info("Set inbound dan outbound notification ke service.");
 		service.setInboundMessageNotification(new InboundMessageNotification());
 		service.setOutboundMessageNotification(new OutboundMessageNotification());
+	}
+	@Override
+	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {	
+		this.applicationEventPublisher = applicationEventPublisher;
 	}
 }

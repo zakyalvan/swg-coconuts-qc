@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import com.swg.sms.action.Action;
 import com.swg.sms.action.ActionStack;
 import com.swg.sms.action.ActionStackFactory;
-import com.swg.sms.action.Format;
-import com.swg.sms.action.Parser;
-import com.swg.sms.action.ParsingException;
 import com.swg.sms.action.param.Parameter;
 import com.swg.sms.entity.InboundMessage;
+import com.swg.sms.format.Format;
+import com.swg.sms.format.Parser;
+import com.swg.sms.format.ParsingException;
 
 /**
  * Implementasi default dari {@link MessageProcessor}.

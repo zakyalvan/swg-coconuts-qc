@@ -9,6 +9,18 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
 	
-	<jpa:repositories base-package="com.swg.sms" />
+	<bean id="smsEntityRegisterar" class="com.swg.core.util.PersistenceEntityRegisterar">
+		<property name="additionalEntityClasses">
+			<set value-type="java.lang.String">
+				<value>com.swg.sms.entity.InboundMessageBean</value>
+				<value>com.swg.sms.entity.OutboundMessageBean</value>
+				<value>com.swg.sms.entity.GatewayInfo</value>
+				<value>com.swg.sms.entity.SerialGatewayInfo</value>
+				<value>com.swg.sms.entity.GatewayAudit</value>
+			</set>
+		</property>
+	</bean>
+	
+	<jpa:repositories base-package="com.swg" />
     <task:annotation-driven />
 </beans>

@@ -1,4 +1,4 @@
-package com.swg.sms.action;
+package com.swg.sms.format;
 
 import java.util.HashSet;
 import java.util.Set;

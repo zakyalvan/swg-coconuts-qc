@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="om")
+@Table(name="outbound_message")
 public class OutboundMessageBean implements OutboundMessage {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

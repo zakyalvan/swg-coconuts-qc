@@ -3,7 +3,7 @@ package com.swg.sms.test;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import com.swg.sms.action.SimpleFormatModel;
+import com.swg.sms.format.SimpleFormatModel;
 
 public class FormatModelUnitTest {
 	private Logger logger = Logger.getLogger(getClass());
