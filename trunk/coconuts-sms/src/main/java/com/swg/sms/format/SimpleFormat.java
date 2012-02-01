@@ -1,4 +1,4 @@
-package com.swg.sms.action;
+package com.swg.sms.format;
 
 /**
  * Implementasi default dan sederhan {@link Format}

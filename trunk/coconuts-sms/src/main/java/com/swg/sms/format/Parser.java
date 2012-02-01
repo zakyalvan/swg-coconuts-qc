@@ -1,4 +1,4 @@
-package com.swg.sms.action;
+package com.swg.sms.format;
 
 import java.util.Collection;
 import java.util.Set;
@@ -12,7 +12,7 @@ import com.swg.sms.action.param.Parameter;
  * @author zakyalvan
  */
 public interface Parser {
-	public static final String DEFAULT_DELIMITER = "\\s*?";
+	public static final String DEFAULT_DELIMITER = "\\s+?";
 	
 	/**
 	 * Parsing payload. Proses parsing dihint oleh {@link Format}, 

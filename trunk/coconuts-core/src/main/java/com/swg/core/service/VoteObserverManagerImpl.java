@@ -21,7 +21,7 @@ import com.swg.core.entity.repo.VoteObserverRepository;
 public class VoteObserverManagerImpl implements VoteObserverManager {
 	private Logger logger = Logger.getLogger(getClass());
 
-	@Autowired(required=true)
+	@Autowired(required=false)
 	private VoteObserverRepository repository;
 	
 	@Override

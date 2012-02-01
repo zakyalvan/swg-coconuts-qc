@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="gateway_type")
-@Table(name="gateway_info_nih")
+@Table(name="gateway_info")
 public abstract class GatewayInfo implements Serializable {
 	protected static final long serialVersionUID = 6483948219953447247L;
 	

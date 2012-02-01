@@ -1,4 +1,4 @@
-package com.swg.sms.action;
+package com.swg.sms.format;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -10,11 +10,11 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import com.swg.sms.action.Format.FormatModel;
-import com.swg.sms.action.param.MapParameter;
+import com.swg.sms.action.Keyword;
 import com.swg.sms.action.param.NumberParameter;
 import com.swg.sms.action.param.Parameter;
 import com.swg.sms.action.param.StringParameter;
+import com.swg.sms.format.Format.FormatModel;
 
 /**
  * Ini representasi dari format sms yang dimengerti oleh system.
@@ -34,9 +34,10 @@ public final class SimpleFormatModel implements FormatModel, Serializable {
 	private static Logger logger = Logger.getLogger(SimpleFormatModel.class);
 	
 	public static final Pattern VALID_FORMAT_PATTERN = 
-			Pattern.compile("(\\G\\s*?\\{\\s*?(([keyword]{6,8}?)|([parmet]{8,10}\\s*?:\\s*?(string|number|map){1}\\s*?:\\s*?(\\w*?){1}))\\s*?\\}\\s*?)\\1*?");
+			Pattern.compile(
+					"(\\G\\s*?\\{\\s*?(([keyword]{6,8}?)|([parmet]{8,10}\\s*?:\\s*?(string|number|map){1}\\s*?:\\s*?(\\w*?){1}))\\s*?\\}\\s*?)\\1*?",
+					Pattern.CASE_INSENSITIVE);
 	
-	@SuppressWarnings("unchecked")
 	public static final SimpleFormatModel decodeFromString(String format) {
 		if(format == null || format.length() == 0) {
 			logger.error("Format parameter should not be null or zero length string.");
@@ -85,7 +86,7 @@ public final class SimpleFormatModel implements FormatModel, Serializable {
 					type = NumberParameter.class;
 				}
 				else if(parameterType.equalsIgnoreCase("map")) {
-					type = (Class<? extends Parameter<?>>) MapParameter.class;
+					//type = (Class<? extends Parameter<?>>) MapParameter.class;
 				}
 				
 				parameterCount++;

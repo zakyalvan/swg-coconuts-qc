@@ -18,6 +18,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.orm.jpa.persistenceunit.PersistenceUnitPostProcessor;
+
 /**
  * Audit trail status dan aktivitas dari gateway.
  * 
@@ -27,7 +29,6 @@ import javax.validation.constraints.NotNull;
 @Table(name="gateway_audit")
 public class GatewayAudit implements Serializable {
 	private static final long serialVersionUID = 1807583001377246472L;
-
 	public enum EventType {
 		STARTED, STOPED, SEND_SMS, RECEIVE_SMS
 	}

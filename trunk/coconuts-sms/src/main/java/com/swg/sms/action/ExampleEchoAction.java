@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import com.swg.sms.action.param.Parameter;
 import com.swg.sms.action.param.StringParameter;
+import com.swg.sms.format.Format;
+import com.swg.sms.format.SimpleFormat;
 
 /**
  * Ini contoh action saja.

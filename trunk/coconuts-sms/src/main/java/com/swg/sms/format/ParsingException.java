@@ -1,4 +1,5 @@
-package com.swg.sms.action;
+package com.swg.sms.format;
+
 
 public class ParsingException extends RuntimeException {
 	private static final long serialVersionUID = 8748430592598071340L;
