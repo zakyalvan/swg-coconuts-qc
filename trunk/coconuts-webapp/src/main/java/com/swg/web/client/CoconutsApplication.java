@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryHandler.DefaultHistorian;
@@ -61,13 +60,11 @@ public class CoconutsApplication {
 		PlaceHistoryMapper historyMapper = GWT.create(CoconutsPlaceHistoryMapper.class);
 		Historian historian = GWT.create(DefaultHistorian.class);
 		PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper, historian);
-		historyHandler.register(placeController, eventBus, Place.NOWHERE);
+		historyHandler.register(placeController, eventBus, MainPlace.DEFAULT);
 		
 		Viewport viewport = new Viewport();
 		viewport.add(coconutsShell);
 		RootPanel.get().add(viewport, 0, 0);
-		
-		placeController.goTo(MainPlace.DEFAULT);
 		
 		logger.info("Handler current history.");
 		historyHandler.handleCurrentHistory();

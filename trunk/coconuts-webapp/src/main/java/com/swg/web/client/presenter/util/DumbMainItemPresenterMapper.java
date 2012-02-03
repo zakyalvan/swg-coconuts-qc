@@ -1,0 +1,24 @@
+package com.swg.web.client.presenter.util;
+
+import java.util.Map;
+
+import com.google.inject.Inject;
+import com.swg.web.client.ioc.ClientFactory;
+import com.swg.web.client.presenter.MainItemPresenter;
+import com.swg.web.client.presenter.impl.DashBoardPresenter;
+
+/**
+ * Mapper untuk main item presenter. Disebut dumb karena mapping dilakukan secara manual.
+ * Mungkin versi smart-nya bisa diimplementasi dengan defered binding.
+ * 
+ * @author zakyalvan
+ */
+public class DumbMainItemPresenterMapper extends MainItemPresenterMapper {
+	@Inject
+	private ClientFactory clientFactory;
+	
+	@Override
+	protected void configurePresenterMap(Map<String, MainItemPresenter<?>> map) {
+		map.put(DashBoardPresenter.NAME, clientFactory.getDashBoardPresenter());
+	}
+}

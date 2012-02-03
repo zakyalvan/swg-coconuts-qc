@@ -3,6 +3,7 @@ package com.swg.web.client.place;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 import com.google.gwt.place.shared.Prefix;
+import com.swg.web.client.presenter.impl.DashBoardPresenter;
 
 public class MainPlace extends Place {
 	@Prefix("main")
@@ -17,7 +18,7 @@ public class MainPlace extends Place {
 		}
 	}
 	
-	public static final MainPlace DEFAULT = new MainPlace("Dashboard");
+	public static final MainPlace DEFAULT = new MainPlace(DashBoardPresenter.NAME);
 	
 	/**
 	 * Name ini menunjukan bagian mana dari view yang akan ditampilin.
@@ -31,13 +32,16 @@ public class MainPlace extends Place {
 	}
 
 	@Override
+	public String toString() {
+		return "MainPlace [name=" + name + "]";
+	}
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.toLowerCase().hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

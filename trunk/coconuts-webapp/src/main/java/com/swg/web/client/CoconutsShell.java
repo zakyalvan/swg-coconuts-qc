@@ -14,8 +14,7 @@ import com.sencha.gxt.widget.core.client.menu.MenuBar;
 import com.sencha.gxt.widget.core.client.menu.MenuBarItem;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
 import com.swg.web.client.ioc.ClientFactory;
-import com.swg.web.client.place.DashBoardPlace;
-import com.swg.web.client.place.SmsServicePlace;
+import com.swg.web.client.place.MainPlace;
 
 public class CoconutsShell extends BorderLayoutContainer {	
 	private ClientFactory clientFactory;
@@ -42,7 +41,7 @@ public class CoconutsShell extends BorderLayoutContainer {
 		dashboardMenuItem.addSelectionHandler(new SelectionHandler<Item>() {
 			@Override
 			public void onSelection(SelectionEvent<Item> event) {
-				placeController.goTo(new DashBoardPlace("dashboard"));
+				placeController.goTo(new MainPlace("dashboard"));
 			}
 		});
 		mainMenu.add(dashboardMenuItem);
@@ -64,7 +63,7 @@ public class CoconutsShell extends BorderLayoutContainer {
 		smsSettingMenuItem.addSelectionHandler(new SelectionHandler<Item>() {
 			@Override
 			public void onSelection(SelectionEvent<Item> event) {
-				placeController.goTo(new SmsServicePlace("messaging"));
+				placeController.goTo(new MainPlace("messaging"));
 			}
 		});
 		settingMenu.add(smsSettingMenuItem);
