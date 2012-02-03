@@ -14,16 +14,18 @@ import com.swg.web.client.CoconutsApplication;
 import com.swg.web.client.CoconutsShell;
 import com.swg.web.client.activity.MainActivity;
 import com.swg.web.client.mvp.CoconutsActivityMapper;
-import com.swg.web.client.presenter.DashBoardPresenter;
 import com.swg.web.client.presenter.MainPresenter.MainView;
 import com.swg.web.client.presenter.SmsServiceSettingPresenter;
 import com.swg.web.client.presenter.VoteCountingPresenter;
 import com.swg.web.client.presenter.VoteObserverPresenter;
+import com.swg.web.client.presenter.impl.DashBoardPresenter;
+import com.swg.web.client.presenter.util.DumbMainItemPresenterMapper;
+import com.swg.web.client.presenter.util.MainItemPresenterMapper;
 import com.swg.web.client.view.MainViewImpl;
-import com.swg.web.client.view.widget.DashBoardWidget;
-import com.swg.web.client.view.widget.SmsServiceSettingWidget;
-import com.swg.web.client.view.widget.VoteCountingWidget;
-import com.swg.web.client.view.widget.VoteObserverWidget;
+import com.swg.web.client.view.web.DashBoardWidget;
+import com.swg.web.client.view.web.SmsServiceSettingWidget;
+import com.swg.web.client.view.web.VoteCountingWidget;
+import com.swg.web.client.view.web.VoteObserverWidget;
 import com.swg.web.shared.request.BaseRequestFactory;
 import com.swg.web.shared.request.CustomRequestTransport;
 import com.swg.web.shared.request.MessagingRequestFactory;
@@ -50,14 +52,18 @@ public class CoconutsModule extends AbstractGinModule {
 		bind(CoconutsShell.class).in(Singleton.class);
 		
 		bind(MainView.class).to(MainViewImpl.class).in(Singleton.class);
-		bind(MainActivity.class).in(Singleton.class);
+		bind(MainActivity.class);
 		
 		bind(SecurityRequestFactory.class).toProvider(SecurityRequestFactoryProvider.class).in(Singleton.class);
 		bind(BaseRequestFactory.class).toProvider(BaseRequestFactoryProvider.class).in(Singleton.class);
 		bind(VoteObserverRequestFactory.class).toProvider(VoteObserverRequestFactoryProvider.class).in(Singleton.class);
 		bind(MessagingRequestFactory.class).toProvider(MessagingRequestFactoryProvider.class).in(Singleton.class);
 		
-		bind(DashBoardPresenter.View.class).to(DashBoardWidget.class).in(Singleton.class);
+		bind(MainItemPresenterMapper.class).to(DumbMainItemPresenterMapper.class).in(Singleton.class);
+		
+		bind(DashBoardPresenter.DashBoardView.class).to(DashBoardWidget.class).in(Singleton.class);
+		bind(DashBoardPresenter.class).in(Singleton.class);
+		
 		bind(VoteObserverPresenter.View.class).to(VoteObserverWidget.class).in(Singleton.class);
 		bind(VoteCountingPresenter.View.class).to(VoteCountingWidget.class).in(Singleton.class);
 		bind(SmsServiceSettingPresenter.View.class).to(SmsServiceSettingWidget.class).in(Singleton.class);

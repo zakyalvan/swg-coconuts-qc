@@ -1,4 +1,4 @@
-package com.swg.web.client.view.widget;
+package com.swg.web.client.view.web;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.widget.core.client.TabItemConfig;

@@ -1,4 +1,4 @@
-package com.swg.web.client.view.widget;
+package com.swg.web.client.view.web;
 
 import java.util.ArrayList;
 import java.util.Date;

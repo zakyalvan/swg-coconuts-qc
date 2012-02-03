@@ -1,4 +1,4 @@
-package com.swg.web.client.view.widget;
+package com.swg.web.client.view.web;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,7 +8,7 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.sencha.gxt.widget.core.client.TabItemConfig;
 import com.sencha.gxt.widget.core.client.container.SimpleContainer;
-import com.swg.web.client.presenter.DashBoardPresenter.View;
+import com.swg.web.client.presenter.impl.DashBoardPresenter.DashBoardView;
 
 /**
  * Ini widget dari activity utama atau widget yang ditampilkan 
@@ -16,7 +16,7 @@ import com.swg.web.client.presenter.DashBoardPresenter.View;
  * 
  * @author zakyalvan
  */
-public class DashBoardWidget implements View {
+public class DashBoardWidget implements DashBoardView {
 	private Logger logger = Logger.getLogger("DashBoardWidget");
 	
 	private EventBus eventBus;

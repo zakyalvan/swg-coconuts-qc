@@ -8,18 +8,19 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.swg.web.client.CoconutsApplication;
 import com.swg.web.client.CoconutsShell;
-import com.swg.web.client.activity.DashBoardActivity;
 import com.swg.web.client.activity.MainActivity;
 import com.swg.web.client.activity.SmsServiceSettingActivity;
 import com.swg.web.client.activity.VoteCountingActivity;
 import com.swg.web.client.activity.VoteObserverActivity;
-import com.swg.web.client.presenter.DashBoardPresenter;
-import com.swg.web.client.presenter.SmsServicePresenter;
 import com.swg.web.client.presenter.MainPresenter.MainView;
+import com.swg.web.client.presenter.SmsServicePresenter;
 import com.swg.web.client.presenter.SmsServicePresenter.View;
 import com.swg.web.client.presenter.SmsServiceSettingPresenter;
 import com.swg.web.client.presenter.VoteCountingPresenter;
-import com.swg.web.client.view.widget.VoteObserverWidget;
+import com.swg.web.client.presenter.impl.DashBoardPresenter;
+import com.swg.web.client.presenter.impl.DashBoardPresenter.DashBoardView;
+import com.swg.web.client.presenter.util.MainItemPresenterMapper;
+import com.swg.web.client.view.web.VoteObserverWidget;
 import com.swg.web.shared.request.BaseRequestFactory;
 import com.swg.web.shared.request.MessagingRequestFactory;
 import com.swg.web.shared.request.SecurityRequestFactory;
@@ -42,10 +43,15 @@ public interface ClientFactory extends Ginjector {
 	MainView getMainView();
 	MainActivity getMainActivity();
 	
+	MainItemPresenterMapper getMainItemPresenterMapper();
+	
 	EventBus getEventBus();
 	PlaceController getPlaceController();
 	
 	RequestTransport getRequestTransport();
+	
+	DashBoardView getDashBoardView();
+	DashBoardPresenter getDashBoardPresenter();
 	
 	/**
 	 * Retrieve initialized base request factory.
@@ -74,10 +80,7 @@ public interface ClientFactory extends Ginjector {
 	 * @return {@link MessagingRequestFactory}
 	 */
 	MessagingRequestFactory getMessagingRequestFactory();
-	
-	DashBoardPresenter.View getDashBoardView();
-	DashBoardActivity getDashBoardActivity();
-	
+		
 	VoteObserverWidget getVoteObserverMngmntView();
 	VoteObserverActivity getVoteObserverMngmntActivity();	
 	
@@ -91,14 +94,6 @@ public interface ClientFactory extends Ginjector {
 	 */
 	SmsServicePresenter.View getMessagingServiceView();
 	
-	/**
-	 * Retrieve view untuk manajemen service perpesanan.
-	 * 
-	 * @return {@link SmsServiceActivity}
-	 */
-//	SmsServiceActivity getMessagingMngmntActivity();
-	
-	//SerialGatewayEditorWidget getSerialGatewayEditorWidget();
 	
 	SmsServiceSettingPresenter.View getSmsServiceSettingView();
 	SmsServiceSettingActivity getSmsServiceSettingActivity();
