@@ -6,5 +6,5 @@ import com.swg.web.client.place.MainPlace;
 
 @WithTokenizers({
 	MainPlace.Tokenizer.class
-	})
-public interface QuickCountPlaceHistoryMapper extends PlaceHistoryMapper {}
+})
+public interface CoconutsPlaceHistoryMapper extends PlaceHistoryMapper {}

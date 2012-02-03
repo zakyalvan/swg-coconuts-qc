@@ -1,23 +1,27 @@
-package com.swg.web.client;
+package com.swg.web.client.ioc;
 
+import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
+import com.swg.web.client.CoconutsApplication;
+import com.swg.web.client.CoconutsShell;
+import com.swg.web.client.activity.MainActivity;
+import com.swg.web.client.mvp.CoconutsActivityMapper;
 import com.swg.web.client.presenter.DashBoardPresenter;
-import com.swg.web.client.presenter.SmsServicePresenter;
+import com.swg.web.client.presenter.MainPresenter.MainView;
 import com.swg.web.client.presenter.SmsServiceSettingPresenter;
 import com.swg.web.client.presenter.VoteCountingPresenter;
 import com.swg.web.client.presenter.VoteObserverPresenter;
+import com.swg.web.client.view.MainViewImpl;
 import com.swg.web.client.view.widget.DashBoardWidget;
-import com.swg.web.client.view.widget.SerialGatewayEditorWidget;
 import com.swg.web.client.view.widget.SmsServiceSettingWidget;
-import com.swg.web.client.view.widget.SmsServiceWidget;
 import com.swg.web.client.view.widget.VoteCountingWidget;
 import com.swg.web.client.view.widget.VoteObserverWidget;
 import com.swg.web.shared.request.BaseRequestFactory;
@@ -31,36 +35,32 @@ import com.swg.web.shared.request.VoteObserverRequestFactory;
  * Gin adalah ioc container untuk client side berbasis gwt.
  * 
  * @author zakyalvan
- *
  */
-public class QuickCountModule extends AbstractGinModule {
+public class CoconutsModule extends AbstractGinModule {
 	@Override
 	protected void configure() {
-		bind(EventBus.class).toProvider(EventBusProvider.class).in(Singleton.class);
+		bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
 		bind(PlaceController.class).toProvider(PlaceControllerProvider.class).in(Singleton.class);
 		
 		bind(RequestTransport.class).toProvider(RequestTransportProvider.class);
 		
-		bind(QuickCountShell.class).in(Singleton.class);
-		bind(DashBoardPresenter.View.class).to(DashBoardWidget.class).in(Singleton.class);
-		bind(VoteObserverPresenter.View.class).to(VoteObserverWidget.class).in(Singleton.class);
-		bind(VoteCountingPresenter.View.class).to(VoteCountingWidget.class).in(Singleton.class);
-		bind(SmsServicePresenter.View.class).to(SmsServiceWidget.class).in(Singleton.class);
-		bind(SmsServiceSettingPresenter.View.class).to(SmsServiceSettingWidget.class).in(Singleton.class);
-		bind(SerialGatewayEditorWidget.class).in(Singleton.class);
+		bind(ActivityMapper.class).to(CoconutsActivityMapper.class).in(Singleton.class);
+		
+		bind(CoconutsApplication.class).in(Singleton.class);
+		bind(CoconutsShell.class).in(Singleton.class);
+		
+		bind(MainView.class).to(MainViewImpl.class).in(Singleton.class);
+		bind(MainActivity.class).in(Singleton.class);
 		
 		bind(SecurityRequestFactory.class).toProvider(SecurityRequestFactoryProvider.class).in(Singleton.class);
 		bind(BaseRequestFactory.class).toProvider(BaseRequestFactoryProvider.class).in(Singleton.class);
 		bind(VoteObserverRequestFactory.class).toProvider(VoteObserverRequestFactoryProvider.class).in(Singleton.class);
 		bind(MessagingRequestFactory.class).toProvider(MessagingRequestFactoryProvider.class).in(Singleton.class);
-	}
-	
-	public static class EventBusProvider implements Provider<EventBus> {
-		@Override
-		public EventBus get() {
-			EventBus eventBus = new SimpleEventBus();
-			return eventBus;
-		}
+		
+		bind(DashBoardPresenter.View.class).to(DashBoardWidget.class).in(Singleton.class);
+		bind(VoteObserverPresenter.View.class).to(VoteObserverWidget.class).in(Singleton.class);
+		bind(VoteCountingPresenter.View.class).to(VoteCountingWidget.class).in(Singleton.class);
+		bind(SmsServiceSettingPresenter.View.class).to(SmsServiceSettingWidget.class).in(Singleton.class);
 	}
 	
 	/**
@@ -83,12 +83,8 @@ public class QuickCountModule extends AbstractGinModule {
 	 * @author zakyalvan
 	 */
 	public static class PlaceControllerProvider implements Provider<PlaceController> {
-		private EventBus eventBus;
-		
 		@Inject(optional=false)
-		public PlaceControllerProvider(EventBus eventBus) {
-			this.eventBus = eventBus;
-		}
+		private EventBus eventBus;
 		
 		@Override
 		public PlaceController get() {
@@ -143,7 +139,7 @@ public class QuickCountModule extends AbstractGinModule {
 	 * @author zakyalvan
 	 *
 	 */
-	public static class VoteObserverRequestFactoryProvider implements com.google.inject.Provider<VoteObserverRequestFactory> {
+	public static class VoteObserverRequestFactoryProvider implements Provider<VoteObserverRequestFactory> {
 		private EventBus eventBus;
 		private RequestTransport requestTransport;
 		
@@ -161,7 +157,7 @@ public class QuickCountModule extends AbstractGinModule {
 	}
 	
 	
-	public static class MessagingRequestFactoryProvider implements com.google.inject.Provider<MessagingRequestFactory> {
+	public static class MessagingRequestFactoryProvider implements Provider<MessagingRequestFactory> {
 		private EventBus eventBus;
 		private RequestTransport requestTransport;
 		

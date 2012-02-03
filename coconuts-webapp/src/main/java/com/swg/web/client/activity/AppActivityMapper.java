@@ -6,9 +6,8 @@ import java.util.logging.Logger;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
-import com.swg.web.client.ClientFactory;
+import com.swg.web.client.ioc.ClientFactory;
 import com.swg.web.client.place.DashBoardPlace;
-import com.swg.web.client.place.SmsServicePlace;
 import com.swg.web.client.place.SmsServiceSettingPlace;
 import com.swg.web.client.place.VoteCountingPlace;
 import com.swg.web.client.place.VoteObserverPlace;
@@ -38,8 +37,6 @@ public class AppActivityMapper implements ActivityMapper {
 			activity = clientFactory.getDashBoardActivity();
 		else if(place instanceof VoteObserverPlace)
 			activity = clientFactory.getVoteObserverMngmntActivity();
-		else if(place instanceof SmsServicePlace)
-			activity = clientFactory.getMessagingMngmntActivity();
 		else if(place instanceof SmsServiceSettingPlace)
 			activity = clientFactory.getSmsServiceSettingActivity();
 		else if(place instanceof VoteCountingPlace)
