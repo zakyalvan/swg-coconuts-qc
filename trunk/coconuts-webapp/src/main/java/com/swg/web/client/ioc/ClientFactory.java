@@ -1,21 +1,24 @@
-package com.swg.web.client;
+package com.swg.web.client.ioc;
 
+import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
+import com.swg.web.client.CoconutsApplication;
+import com.swg.web.client.CoconutsShell;
 import com.swg.web.client.activity.DashBoardActivity;
-import com.swg.web.client.activity.SmsServiceActivity;
+import com.swg.web.client.activity.MainActivity;
 import com.swg.web.client.activity.SmsServiceSettingActivity;
 import com.swg.web.client.activity.VoteCountingActivity;
 import com.swg.web.client.activity.VoteObserverActivity;
 import com.swg.web.client.presenter.DashBoardPresenter;
 import com.swg.web.client.presenter.SmsServicePresenter;
+import com.swg.web.client.presenter.MainPresenter.MainView;
+import com.swg.web.client.presenter.SmsServicePresenter.View;
 import com.swg.web.client.presenter.SmsServiceSettingPresenter;
 import com.swg.web.client.presenter.VoteCountingPresenter;
-import com.swg.web.client.presenter.SmsServicePresenter.View;
-import com.swg.web.client.view.widget.SerialGatewayEditorWidget;
 import com.swg.web.client.view.widget.VoteObserverWidget;
 import com.swg.web.shared.request.BaseRequestFactory;
 import com.swg.web.shared.request.MessagingRequestFactory;
@@ -29,8 +32,16 @@ import com.swg.web.shared.request.VoteObserverRequestFactory;
  * 
  * @author zakyalvan
  */
-@GinModules(QuickCountModule.class)
+@GinModules(CoconutsModule.class)
 public interface ClientFactory extends Ginjector {
+	CoconutsApplication getApplication();
+	CoconutsShell getShell();
+	
+	ActivityMapper getActivityMapper();
+	
+	MainView getMainView();
+	MainActivity getMainActivity();
+	
 	EventBus getEventBus();
 	PlaceController getPlaceController();
 	
@@ -64,9 +75,6 @@ public interface ClientFactory extends Ginjector {
 	 */
 	MessagingRequestFactory getMessagingRequestFactory();
 	
-	QuickCountShell getApplicationShell();
-	
-	
 	DashBoardPresenter.View getDashBoardView();
 	DashBoardActivity getDashBoardActivity();
 	
@@ -88,9 +96,9 @@ public interface ClientFactory extends Ginjector {
 	 * 
 	 * @return {@link SmsServiceActivity}
 	 */
-	SmsServiceActivity getMessagingMngmntActivity();
+//	SmsServiceActivity getMessagingMngmntActivity();
 	
-	SerialGatewayEditorWidget getSerialGatewayEditorWidget();
+	//SerialGatewayEditorWidget getSerialGatewayEditorWidget();
 	
 	SmsServiceSettingPresenter.View getSmsServiceSettingView();
 	SmsServiceSettingActivity getSmsServiceSettingActivity();
