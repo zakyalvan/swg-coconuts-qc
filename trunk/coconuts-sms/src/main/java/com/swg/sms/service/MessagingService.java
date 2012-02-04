@@ -135,7 +135,7 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 		this.processMessage(outboundMessage, false);
 	}
 	
-	@Scheduled(fixedDelay=5000)
+	@Scheduled(fixedDelay=60000)
 	synchronized void checkAndProcessInboundMessage() {
 		logger.info("Check and process inbound message.");
 		
@@ -148,7 +148,7 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 			}
 		}
 	}
-	@Scheduled(fixedDelay=5000)
+	@Scheduled(fixedDelay=60000)
 	synchronized void checkAndProcessOutboundMessage() {
 		logger.info("Check and process outbound message.");
 		if(outboundMessageRepository.countNewMessages() > 0) {

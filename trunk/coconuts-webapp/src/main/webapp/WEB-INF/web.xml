@@ -28,10 +28,10 @@
 		<filter-name>HttpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
 	</filter>
-	<filter>
+	<!-- <filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
+	</filter> -->
 	<filter>
 		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
@@ -48,10 +48,10 @@
     
     
     
-	<filter-mapping>
+	<!-- <filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 	<filter-mapping>
 		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
 		<url-pattern>/*</url-pattern>

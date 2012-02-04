@@ -9,12 +9,11 @@
 	<inherits name="com.google.gwt.editor.Editor" />
 	<inherits name="com.google.gwt.i18n.I18N"/>
 	<inherits name='com.sencha.gxt.ui.GXT' />
-	<!-- <inherits name="com.sencha.gxt.theme.gray.Gray" /> -->
 	<inherits name="com.google.gwt.logging.Logging"/>
 	
 	<entry-point class='com.swg.web.client.CoconutsEntryPoint'/>
 
-	<set-property name="gwt.logging.enabled" value="TRUE"/> 
+	<set-property name="gwt.logging.enabled" value="FALSE"/> 
 	<set-property name="gwt.logging.logLevel" value="FINEST"/>
 	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
 

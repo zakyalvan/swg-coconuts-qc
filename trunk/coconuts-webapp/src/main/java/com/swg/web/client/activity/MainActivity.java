@@ -24,6 +24,8 @@ public class MainActivity extends AbstractActivity implements MainPresenter {
 	
 	private MainPlace mainPlace;
 	
+	private MainItemPresenter<?> currentMainItemPresenter;
+	
 	@Inject
 	public MainActivity(ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
@@ -55,7 +57,7 @@ public class MainActivity extends AbstractActivity implements MainPresenter {
 			messageBox.show();
 		}
 		else {
-			mainView.showItemView(mainItemPresenter.getView());
+			mainView.showItemView(mainItemPresenter.getName(), mainItemPresenter.getView());
 		}
 		
 		/**
@@ -63,16 +65,24 @@ public class MainActivity extends AbstractActivity implements MainPresenter {
 		 * Biar ga makan resource untuk ngerender main view berulang kali.
 		 */
 		panel.setWidget(mainView);
+
+		currentMainItemPresenter = mainItemPresenter;
+		currentMainItemPresenter.setIteractive(true);
 	}
 
 	@Override
 	public void onCancel() {
-		logger.fine("On activity ("+this+") cancel. Reset internal event bus."); 
+		logger.fine("On activity ("+this+") cancel. Reset internal event bus.");
+		
+		if(currentMainItemPresenter != null)
+			currentMainItemPresenter.setIteractive(false);
+		
 		resettableEventBus.removeHandlers();
 	}
 	@Override
 	public void onStop() {
 		logger.fine("On activity ("+this+") stop. Reset and remove internal event bus.");
+		currentMainItemPresenter.setIteractive(false);
 		resettableEventBus.removeHandlers();
 		resettableEventBus = null;
 	}

@@ -15,6 +15,8 @@ import com.sencha.gxt.widget.core.client.menu.MenuBarItem;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
 import com.swg.web.client.ioc.ClientFactory;
 import com.swg.web.client.place.MainPlace;
+import com.swg.web.client.presenter.impl.InboundMessagePresenter;
+import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
 
 public class CoconutsShell extends BorderLayoutContainer {	
 	private ClientFactory clientFactory;
@@ -51,8 +53,20 @@ public class CoconutsShell extends BorderLayoutContainer {
 		MenuBarItem messageBarItem = new MenuBarItem("Kotak Pesan");
 		Menu messageMenu = new Menu();
 		MenuItem inboxMenuItem = new MenuItem("Pesan Masuk");
+		inboxMenuItem.addSelectionHandler(new SelectionHandler<Item>() {
+			@Override
+			public void onSelection(SelectionEvent<Item> event) {
+				placeController.goTo(new MainPlace(InboundMessagePresenter.NAME));
+			}
+		});
 		messageMenu.add(inboxMenuItem);
 		MenuItem outboxMenuItem = new MenuItem("Pesan Keluar");
+		outboxMenuItem.addSelectionHandler(new SelectionHandler<Item>() {
+			@Override
+			public void onSelection(SelectionEvent<Item> event) {
+				placeController.goTo(new MainPlace(OutboundMessagePresenter.NAME));
+			}
+		});
 		messageMenu.add(outboxMenuItem);
 		messageBarItem.setMenu(messageMenu);
 		menuBar.add(messageBarItem);

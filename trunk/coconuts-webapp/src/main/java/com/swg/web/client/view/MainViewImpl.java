@@ -18,26 +18,28 @@ public class MainViewImpl extends TabPanel implements MainView {
 		setBodyBorder(true);
 	    setTabScroll(true);
 	    setCloseContextMenu(true);
+	    setAnimScroll(true);
 	    
 		addSelectionHandler(new SelectionHandler<Widget>() {
 			@Override
 			public void onSelection(SelectionEvent<Widget> event) {
 				Widget selectedItem = event.getSelectedItem();
-				TabItemConfig selectedConfig = getConfig(selectedItem);
-				String selectedName = selectedConfig.getText();
+				CustomTabItemConfig selectedConfig = (CustomTabItemConfig) getConfig(selectedItem);
+				String selectedId = selectedConfig.getId();
 				
-				eventBus.fireEvent(new MainPlaceChangeEvent(selectedName));
+				eventBus.fireEvent(new MainPlaceChangeEvent(selectedId));
 			}
 		});
 	}
 
 	@Override
-	public void showItemView(MainItemView itemView) {
+	public void showItemView(String id, MainItemView itemView) {
 		if(itemView != null) {
-			TabItemConfig itemConfig = new TabItemConfig();
+			CustomTabItemConfig itemConfig = new CustomTabItemConfig();
+			itemConfig.setId(id);
 			itemView.configureTab(itemConfig);
 			
-			SimpleContainer item = findViewItem(itemConfig.getText());
+			SimpleContainer item = findViewItem(id);
 			
 			if(item == null) {
 				item = new SimpleContainer();
@@ -49,14 +51,28 @@ public class MainViewImpl extends TabPanel implements MainView {
 		}
 	}
 
-	private SimpleContainer findViewItem(String name) {
+	private SimpleContainer findViewItem(String id) {
 		for(int i = 0 ; i < getWidgetCount() ; i++) {
 			SimpleContainer viewItem = (SimpleContainer) getWidget(i);
-			TabItemConfig itemConfig = getConfig(viewItem);
-			if ((itemConfig.isHTML() ? itemConfig.getHTML() : itemConfig.getText()).equalsIgnoreCase(name)) {
+			CustomTabItemConfig itemConfig = (CustomTabItemConfig) getConfig(viewItem);
+			if (itemConfig.getId().equalsIgnoreCase(id)) {
 				return viewItem;
 			}
 		}
 		return null;
+	}
+	
+	private class CustomTabItemConfig extends TabItemConfig {
+		private String id;
+		
+		public CustomTabItemConfig() {
+			super();
+		}
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
 	}
 }

@@ -29,4 +29,16 @@ public class DashBoardPresenter implements MainItemPresenter<DashBoardView> {
 	public String getName() {
 		return NAME;
 	}
+
+	@Override
+	public boolean isInteractive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setIteractive(boolean interactive) {
+		// TODO Auto-generated method stub
+		
+	}
 }

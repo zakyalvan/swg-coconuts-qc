@@ -1,8 +1,13 @@
 package com.swg.web.shared.proxy.locator;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.google.web.bindery.requestfactory.shared.Locator;
-import com.swg.sms.entity.InboundMessage;
 import com.swg.sms.entity.InboundMessageBean;
+import com.swg.sms.entity.repo.InboundMessageRepository;
 
 /**
  * Locator untuk entity inbound message.
@@ -10,24 +15,30 @@ import com.swg.sms.entity.InboundMessageBean;
  * 
  * @author zakyalvan
  */
-public class InboundMessageLocator extends Locator<InboundMessage, Integer> {
+@Component
+@Scope("prototype")
+@Configurable
+public class InboundMessageLocator extends Locator<InboundMessageBean, Integer> {
+	@Autowired(required=true)
+	private InboundMessageRepository inboundMessageRepository;
+	
 	@Override
-	public InboundMessageBean create(Class<? extends InboundMessage> clazz) {
-		return null;
+	public InboundMessageBean create(Class<? extends InboundMessageBean> clazz) {
+		return new InboundMessageBean();
 	}
 
 	@Override
-	public InboundMessageBean find(Class<? extends InboundMessage> clazz, Integer id) {
-		return null;
+	public InboundMessageBean find(Class<? extends InboundMessageBean> clazz, Integer id) {
+		return inboundMessageRepository.findOne(id);
 	}
 
 	@Override
-	public Class<InboundMessage> getDomainType() {
-		return InboundMessage.class;
+	public Class<InboundMessageBean> getDomainType() {
+		return InboundMessageBean.class;
 	}
 
 	@Override
-	public Integer getId(InboundMessage domainObject) {
+	public Integer getId(InboundMessageBean domainObject) {
 		return domainObject.getId();
 	}
 
@@ -37,7 +48,7 @@ public class InboundMessageLocator extends Locator<InboundMessage, Integer> {
 	}
 
 	@Override
-	public Object getVersion(InboundMessage domainObject) {
+	public Object getVersion(InboundMessageBean domainObject) {
 		return domainObject.getVersion();
 	}
 }

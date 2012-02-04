@@ -4,8 +4,8 @@ import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
-import com.swg.server.sms.service.MessageService;
 import com.swg.sms.entity.repo.InboundMessageRepository;
+import com.swg.sms.service.ServiceLifecycleManager;
 import com.swg.web.shared.ApplicationServiceLocator;
 
 /**
@@ -16,10 +16,10 @@ import com.swg.web.shared.ApplicationServiceLocator;
  * @author zakyalvan
  */
 public interface MessagingRequestFactory extends RequestFactory {
-	@Service(value=MessageService.class, locator=ApplicationServiceLocator.class)
+	@Service(value=ServiceLifecycleManager.class, locator=ApplicationServiceLocator.class)
 	public interface ServiceLifecycleRequest extends RequestContext {
-		public Request<Void> startService();
-		public Request<Void> stopService();
+		Request<Void> startService();
+		Request<Void> stopService();
 	}
 	
 	@Service(value=InboundMessageRepository.class, locator=ApplicationServiceLocator.class)
