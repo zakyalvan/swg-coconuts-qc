@@ -38,19 +38,18 @@ import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
 import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent.SelectionChangedHandler;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
-import com.swg.web.client.activity.VoteCountingActivity;
 import com.swg.web.client.event.VoteCountDeleteReqEvent;
 import com.swg.web.client.event.VoteCountRequestEvent;
-import com.swg.web.client.presenter.VoteCountingPresenter.View;
+import com.swg.web.client.presenter.impl.VoteCountingPresenter.VoteCountingView;
 import com.swg.web.shared.proxy.VoteResultProxy;
 
 /**
- * Widget yang nampilin data hasil perhitungan suara (representasi dari aktifitas {@link VoteCountingActivity}).
+ * Widget yang nampilin data hasil perhitungan suara.
  * Data ditampilkan keseluruhan dalam bentuk grid.
  * 
  * @author zakyalvan
  */
-public class VoteCountingWidget implements View {
+public class VoteCountingWidget implements VoteCountingView {
 	public interface VoteCountProxyProperties extends PropertyAccess<VoteResultProxy> {
 		ModelKeyProvider<VoteResultProxy> id();
 		ValueProvider<VoteResultProxy, Date> updateTime();
@@ -89,7 +88,6 @@ public class VoteCountingWidget implements View {
 		ModelKeyProvider<? super VoteResultProxy> keyProvider = proxyProperties.id();
 		
 		contentPanel = new SimpleContainer();
-//		contentPanel.setBorders(true);
 		
 		VerticalLayoutContainer container = new VerticalLayoutContainer();
 		container.setDeferHeight(true);

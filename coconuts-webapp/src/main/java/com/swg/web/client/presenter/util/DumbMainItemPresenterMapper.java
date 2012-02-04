@@ -6,6 +6,8 @@ import com.google.inject.Inject;
 import com.swg.web.client.ioc.ClientFactory;
 import com.swg.web.client.presenter.MainItemPresenter;
 import com.swg.web.client.presenter.impl.DashBoardPresenter;
+import com.swg.web.client.presenter.impl.InboundMessagePresenter;
+import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
 
 /**
  * Mapper untuk main item presenter. Disebut dumb karena mapping dilakukan secara manual.
@@ -20,5 +22,7 @@ public class DumbMainItemPresenterMapper extends MainItemPresenterMapper {
 	@Override
 	protected void configurePresenterMap(Map<String, MainItemPresenter<?>> map) {
 		map.put(DashBoardPresenter.NAME, clientFactory.getDashBoardPresenter());
+		map.put(InboundMessagePresenter.NAME, clientFactory.getInboundMessagePresenter());
+		map.put(OutboundMessagePresenter.NAME, clientFactory.getOutboundMessagePresenter());
 	}
 }

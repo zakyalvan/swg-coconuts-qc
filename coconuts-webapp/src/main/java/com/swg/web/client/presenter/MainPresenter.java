@@ -7,7 +7,7 @@ import com.swg.web.client.presenter.MainPresenter.MainView;
 
 public interface MainPresenter extends Presenter<MainView> {
 	public interface MainView extends IsWidget {
-		void showItemView(MainItemView itemView);
+		void showItemView(String id, MainItemView itemView);
 	}
 	
 	public void setMainPlace(MainPlace newMainPlace);

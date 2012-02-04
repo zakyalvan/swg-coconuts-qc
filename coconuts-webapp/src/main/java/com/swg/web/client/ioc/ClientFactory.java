@@ -10,15 +10,19 @@ import com.swg.web.client.CoconutsApplication;
 import com.swg.web.client.CoconutsShell;
 import com.swg.web.client.activity.MainActivity;
 import com.swg.web.client.activity.SmsServiceSettingActivity;
-import com.swg.web.client.activity.VoteCountingActivity;
 import com.swg.web.client.activity.VoteObserverActivity;
 import com.swg.web.client.presenter.MainPresenter.MainView;
 import com.swg.web.client.presenter.SmsServicePresenter;
 import com.swg.web.client.presenter.SmsServicePresenter.View;
 import com.swg.web.client.presenter.SmsServiceSettingPresenter;
-import com.swg.web.client.presenter.VoteCountingPresenter;
 import com.swg.web.client.presenter.impl.DashBoardPresenter;
 import com.swg.web.client.presenter.impl.DashBoardPresenter.DashBoardView;
+import com.swg.web.client.presenter.impl.InboundMessagePresenter;
+import com.swg.web.client.presenter.impl.InboundMessagePresenter.InboundMessageView;
+import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
+import com.swg.web.client.presenter.impl.OutboundMessagePresenter.OutboundMessageView;
+import com.swg.web.client.presenter.impl.VoteCountingPresenter;
+import com.swg.web.client.presenter.impl.VoteCountingPresenter.VoteCountingView;
 import com.swg.web.client.presenter.util.MainItemPresenterMapper;
 import com.swg.web.client.view.web.VoteObserverWidget;
 import com.swg.web.shared.request.BaseRequestFactory;
@@ -53,6 +57,15 @@ public interface ClientFactory extends Ginjector {
 	DashBoardView getDashBoardView();
 	DashBoardPresenter getDashBoardPresenter();
 	
+	InboundMessageView getInboundMessageView();
+	InboundMessagePresenter getInboundMessagePresenter();
+	
+	OutboundMessageView getOutboundMessageView();
+	OutboundMessagePresenter getOutboundMessagePresenter();
+	
+	VoteCountingView getVoteCountingView();
+	VoteCountingPresenter getVoteCountingPresenter();
+	
 	/**
 	 * Retrieve initialized base request factory.
 	 * 
@@ -82,10 +95,7 @@ public interface ClientFactory extends Ginjector {
 	MessagingRequestFactory getMessagingRequestFactory();
 		
 	VoteObserverWidget getVoteObserverMngmntView();
-	VoteObserverActivity getVoteObserverMngmntActivity();	
-	
-	VoteCountingPresenter.View getVoteCountingView();
-	VoteCountingActivity getVoteCountingActivity();
+	VoteObserverActivity getVoteObserverMngmntActivity();
 	
 	/**
 	 * Retrieve view untuk manajemen service perpesanan.

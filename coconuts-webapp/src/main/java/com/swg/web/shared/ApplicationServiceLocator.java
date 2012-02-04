@@ -25,7 +25,7 @@ public class ApplicationServiceLocator implements ApplicationContextAware, Servi
 	
 	@Override
 	public Object getInstance(Class<?> clazz) {
-		logger.debug("Get bean reference of type " + clazz + " from spring container.");
+		logger.info("Get bean reference of type " + clazz + " from spring container.");
 		return applicationContext.getBean(clazz);
 	}
 	

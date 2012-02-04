@@ -43,7 +43,7 @@ public class InboundMessageBean implements InboundMessage {
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="receive_data")
+	@Column(name="receive_date")
 	private Date receiveDate;
 	
 	@NotNull
@@ -54,7 +54,9 @@ public class InboundMessageBean implements InboundMessage {
 	@Column(name="version")
 	private Timestamp version;
 	
-	public InboundMessageBean() {}
+	public InboundMessageBean() {
+		this.status = InboundMessage.NEW_MESSAGE;
+	}
 	public InboundMessageBean(String sender, String content) {
 		this.sender = sender;
 		this.content = content;
@@ -77,6 +79,7 @@ public class InboundMessageBean implements InboundMessage {
 		this.id = id;
 	}
 	
+	@Override
 	public GatewayInfo getGatewayInfo() {
 		return gatewayInfo;
 	}
@@ -92,10 +95,15 @@ public class InboundMessageBean implements InboundMessage {
 		this.sender = sender;
 	}
 	
+	@Override
 	public String getServiceCenter() {
 		return serviceCenter;
 	}
+	public void setServiceCenter(String serviceCenter) {
+		this.serviceCenter = serviceCenter;
+	}
 	
+	@Override
 	public String getContent() {
 		return content;
 	}
@@ -103,8 +111,12 @@ public class InboundMessageBean implements InboundMessage {
 		this.content = content;
 	}
 	
+	@Override
 	public Date getReceiveDate() {
 		return receiveDate;
+	}
+	public void setReceiveDate(Date receiveDate) {
+		this.receiveDate = receiveDate;
 	}
 	
 	@Override
@@ -115,8 +127,12 @@ public class InboundMessageBean implements InboundMessage {
 		this.status = status;
 	}
 	
+	@Override
 	public Timestamp getVersion() {
 		return version;
+	}
+	public void setVersion(Date version) {
+		this.version = new Timestamp(version.getTime());
 	}
 	
 	@Override

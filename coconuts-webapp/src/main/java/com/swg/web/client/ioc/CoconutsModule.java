@@ -16,13 +16,17 @@ import com.swg.web.client.activity.MainActivity;
 import com.swg.web.client.mvp.CoconutsActivityMapper;
 import com.swg.web.client.presenter.MainPresenter.MainView;
 import com.swg.web.client.presenter.SmsServiceSettingPresenter;
-import com.swg.web.client.presenter.VoteCountingPresenter;
 import com.swg.web.client.presenter.VoteObserverPresenter;
 import com.swg.web.client.presenter.impl.DashBoardPresenter;
+import com.swg.web.client.presenter.impl.InboundMessagePresenter;
+import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
+import com.swg.web.client.presenter.impl.VoteCountingPresenter;
 import com.swg.web.client.presenter.util.DumbMainItemPresenterMapper;
 import com.swg.web.client.presenter.util.MainItemPresenterMapper;
 import com.swg.web.client.view.MainViewImpl;
 import com.swg.web.client.view.web.DashBoardWidget;
+import com.swg.web.client.view.web.InboundMessageWidget;
+import com.swg.web.client.view.web.OutboundMessageWidget;
 import com.swg.web.client.view.web.SmsServiceSettingWidget;
 import com.swg.web.client.view.web.VoteCountingWidget;
 import com.swg.web.client.view.web.VoteObserverWidget;
@@ -64,8 +68,16 @@ public class CoconutsModule extends AbstractGinModule {
 		bind(DashBoardPresenter.DashBoardView.class).to(DashBoardWidget.class).in(Singleton.class);
 		bind(DashBoardPresenter.class).in(Singleton.class);
 		
+		bind(InboundMessagePresenter.InboundMessageView.class).to(InboundMessageWidget.class).in(Singleton.class);
+		bind(InboundMessagePresenter.class).in(Singleton.class);
+		
+		bind(OutboundMessagePresenter.OutboundMessageView.class).to(OutboundMessageWidget.class).in(Singleton.class);
+		bind(OutboundMessagePresenter.class).in(Singleton.class);
+		
+		bind(VoteCountingPresenter.VoteCountingView.class).to(VoteCountingWidget.class).in(Singleton.class);
+		bind(VoteCountingPresenter.class).in(Singleton.class);
+		
 		bind(VoteObserverPresenter.View.class).to(VoteObserverWidget.class).in(Singleton.class);
-		bind(VoteCountingPresenter.View.class).to(VoteCountingWidget.class).in(Singleton.class);
 		bind(SmsServiceSettingPresenter.View.class).to(SmsServiceSettingWidget.class).in(Singleton.class);
 	}
 	
