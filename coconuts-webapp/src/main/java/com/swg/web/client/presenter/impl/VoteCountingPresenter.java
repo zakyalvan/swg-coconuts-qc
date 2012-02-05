@@ -36,7 +36,7 @@ public class VoteCountingPresenter implements MainItemPresenter<VoteCountingView
 		return interactive;
 	}
 	@Override
-	public void setIteractive(boolean interactive) {
+	public void setInteractive(boolean interactive) {
 		this.interactive = interactive;
 	}
 

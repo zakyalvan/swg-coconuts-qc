@@ -37,7 +37,7 @@ public class DashBoardPresenter implements MainItemPresenter<DashBoardView> {
 	}
 
 	@Override
-	public void setIteractive(boolean interactive) {
+	public void setInteractive(boolean interactive) {
 		// TODO Auto-generated method stub
 		
 	}

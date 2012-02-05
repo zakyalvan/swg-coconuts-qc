@@ -67,7 +67,7 @@ public class MainActivity extends AbstractActivity implements MainPresenter {
 		panel.setWidget(mainView);
 
 		currentMainItemPresenter = mainItemPresenter;
-		currentMainItemPresenter.setIteractive(true);
+		currentMainItemPresenter.setInteractive(true);
 	}
 
 	@Override
@@ -75,14 +75,14 @@ public class MainActivity extends AbstractActivity implements MainPresenter {
 		logger.fine("On activity ("+this+") cancel. Reset internal event bus.");
 		
 		if(currentMainItemPresenter != null)
-			currentMainItemPresenter.setIteractive(false);
+			currentMainItemPresenter.setInteractive(false);
 		
 		resettableEventBus.removeHandlers();
 	}
 	@Override
 	public void onStop() {
 		logger.fine("On activity ("+this+") stop. Reset and remove internal event bus.");
-		currentMainItemPresenter.setIteractive(false);
+		currentMainItemPresenter.setInteractive(false);
 		resettableEventBus.removeHandlers();
 		resettableEventBus = null;
 	}

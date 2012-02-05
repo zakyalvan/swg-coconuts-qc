@@ -2,7 +2,7 @@ package com.swg.web.client.event;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.swg.web.client.event.WidgetTimerTimeoutEvent.Handler;
+import com.swg.web.client.event.WidgetTimerTimeoutEvent.WidgetTimerTimeoutHandler;
 
 /**
  * Event yang dipublish oleh global timer pada saat timer tersebut timeout.
@@ -11,19 +11,19 @@ import com.swg.web.client.event.WidgetTimerTimeoutEvent.Handler;
  * 
  * @author zakyalvan
  */
-public class WidgetTimerTimeoutEvent extends GwtEvent<Handler> {
-	public interface Handler extends EventHandler {
+public class WidgetTimerTimeoutEvent extends GwtEvent<WidgetTimerTimeoutHandler> {
+	public interface WidgetTimerTimeoutHandler extends EventHandler {
 		void onWidgetTimerTimeout(WidgetTimerTimeoutEvent timeoutEvent);
 	}
 
-	public static final Type<WidgetTimerTimeoutEvent.Handler> TYPE = new Type<WidgetTimerTimeoutEvent.Handler>();
+	public static final Type<WidgetTimerTimeoutEvent.WidgetTimerTimeoutHandler> TYPE = new Type<WidgetTimerTimeoutEvent.WidgetTimerTimeoutHandler>();
 	
 	@Override
-	public Type<Handler> getAssociatedType() {
+	public Type<WidgetTimerTimeoutHandler> getAssociatedType() {
 		return TYPE;
 	}
 	@Override
-	protected void dispatch(Handler handler) {
+	protected void dispatch(WidgetTimerTimeoutHandler handler) {
 		handler.onWidgetTimerTimeout(this);
 	}
 }

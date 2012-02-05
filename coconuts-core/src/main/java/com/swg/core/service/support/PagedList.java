@@ -1,4 +1,4 @@
-package com.swg.core.service;
+package com.swg.core.service.support;
 
 import java.io.Serializable;
 import java.util.List;

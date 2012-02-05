@@ -18,5 +18,5 @@ public interface MainItemPresenter<V extends MainItemView> extends Presenter<V>,
 	 * @return
 	 */
 	boolean isInteractive();
-	void setIteractive(boolean interactive);
+	void setInteractive(boolean interactive);
 }

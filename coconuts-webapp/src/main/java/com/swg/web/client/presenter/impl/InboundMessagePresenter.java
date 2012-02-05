@@ -54,7 +54,7 @@ public class InboundMessagePresenter implements MainItemPresenter<InboundMessage
 		return interactive;
 	}
 	@Override
-	public void setIteractive(boolean interactive) {
+	public void setInteractive(boolean interactive) {
 		if(interactive) {
 			loadDatas();
 		}

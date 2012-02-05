@@ -10,7 +10,6 @@ import com.swg.web.client.CoconutsApplication;
 import com.swg.web.client.CoconutsShell;
 import com.swg.web.client.activity.MainActivity;
 import com.swg.web.client.activity.SmsServiceSettingActivity;
-import com.swg.web.client.activity.VoteObserverActivity;
 import com.swg.web.client.presenter.MainPresenter.MainView;
 import com.swg.web.client.presenter.SmsServicePresenter;
 import com.swg.web.client.presenter.SmsServicePresenter.View;
@@ -23,9 +22,12 @@ import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
 import com.swg.web.client.presenter.impl.OutboundMessagePresenter.OutboundMessageView;
 import com.swg.web.client.presenter.impl.VoteCountingPresenter;
 import com.swg.web.client.presenter.impl.VoteCountingPresenter.VoteCountingView;
+import com.swg.web.client.presenter.impl.VoteObserverPresenter;
+import com.swg.web.client.presenter.impl.VoteObserverPresenter.VoteObserverView;
+import com.swg.web.client.presenter.impl.VoteRecapitulatePresenter;
+import com.swg.web.client.presenter.impl.VoteRecapitulatePresenter.VoteRecapitulateView;
 import com.swg.web.client.presenter.util.MainItemPresenterMapper;
 import com.swg.web.client.view.GlobalWidgetTimer;
-import com.swg.web.client.view.web.VoteObserverWidget;
 import com.swg.web.shared.request.BaseRequestFactory;
 import com.swg.web.shared.request.MessagingRequestFactory;
 import com.swg.web.shared.request.SecurityRequestFactory;
@@ -69,6 +71,12 @@ public interface ClientFactory extends Ginjector {
 	VoteCountingView getVoteCountingView();
 	VoteCountingPresenter getVoteCountingPresenter();
 	
+	VoteRecapitulateView getVoteRecapitulateView();
+	VoteRecapitulatePresenter getVoteRecapitulatePresenter();
+	
+	VoteObserverView getVoteObserverView();
+	VoteObserverPresenter getVoteObserverPresenter();
+	
 	/**
 	 * Retrieve initialized base request factory.
 	 * 
@@ -97,8 +105,6 @@ public interface ClientFactory extends Ginjector {
 	 */
 	MessagingRequestFactory getMessagingRequestFactory();
 		
-	VoteObserverWidget getVoteObserverMngmntView();
-	VoteObserverActivity getVoteObserverMngmntActivity();
 	
 	/**
 	 * Retrieve view untuk manajemen service perpesanan.
