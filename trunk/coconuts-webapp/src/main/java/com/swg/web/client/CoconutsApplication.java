@@ -18,6 +18,7 @@ import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 import com.sencha.gxt.widget.core.client.container.Viewport;
 import com.swg.web.client.mvp.CoconutsPlaceHistoryMapper;
 import com.swg.web.client.place.MainPlace;
+import com.swg.web.client.view.GlobalWidgetTimer;
 
 /**
  * Object dalam konteks aplikasi yang dijalankan pertama kali pada saat 
@@ -40,6 +41,9 @@ public class CoconutsApplication {
 
 	@Inject
 	private CoconutsShell coconutsShell;
+	
+	@Inject
+	private GlobalWidgetTimer globalWidgetTimer;
 
 	public void run() {
 //		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
@@ -48,6 +52,8 @@ public class CoconutsApplication {
 //				
 //			}
 //		});
+		logger.info("Start global widget timer.");
+		globalWidgetTimer.scheduleRepeating(GlobalWidgetTimer.DEFAULT_TIMEOUT);
 		
 		logger.info("Create activity manager.");
 		ActivityManager activityManager = new ActivityManager(activityMapper, eventBus);

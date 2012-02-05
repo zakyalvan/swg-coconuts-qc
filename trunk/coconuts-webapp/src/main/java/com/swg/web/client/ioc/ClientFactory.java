@@ -24,6 +24,7 @@ import com.swg.web.client.presenter.impl.OutboundMessagePresenter.OutboundMessag
 import com.swg.web.client.presenter.impl.VoteCountingPresenter;
 import com.swg.web.client.presenter.impl.VoteCountingPresenter.VoteCountingView;
 import com.swg.web.client.presenter.util.MainItemPresenterMapper;
+import com.swg.web.client.view.GlobalWidgetTimer;
 import com.swg.web.client.view.web.VoteObserverWidget;
 import com.swg.web.shared.request.BaseRequestFactory;
 import com.swg.web.shared.request.MessagingRequestFactory;
@@ -43,6 +44,8 @@ public interface ClientFactory extends Ginjector {
 	CoconutsShell getShell();
 	
 	ActivityMapper getActivityMapper();
+	
+	GlobalWidgetTimer getGlobalWidgetTimer();
 	
 	MainView getMainView();
 	MainActivity getMainActivity();

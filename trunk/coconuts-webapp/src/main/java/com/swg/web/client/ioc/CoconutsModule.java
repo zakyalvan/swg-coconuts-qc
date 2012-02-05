@@ -23,6 +23,7 @@ import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
 import com.swg.web.client.presenter.impl.VoteCountingPresenter;
 import com.swg.web.client.presenter.util.DumbMainItemPresenterMapper;
 import com.swg.web.client.presenter.util.MainItemPresenterMapper;
+import com.swg.web.client.view.GlobalWidgetTimer;
 import com.swg.web.client.view.MainViewImpl;
 import com.swg.web.client.view.web.DashBoardWidget;
 import com.swg.web.client.view.web.InboundMessageWidget;
@@ -54,6 +55,8 @@ public class CoconutsModule extends AbstractGinModule {
 		
 		bind(CoconutsApplication.class).in(Singleton.class);
 		bind(CoconutsShell.class).in(Singleton.class);
+		
+		bind(GlobalWidgetTimer.class).in(Singleton.class);
 		
 		bind(MainView.class).to(MainViewImpl.class).in(Singleton.class);
 		bind(MainActivity.class);
