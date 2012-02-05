@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.google.web.bindery.requestfactory.shared.ValueProxy;
-import com.swg.core.service.BasePagedList;
 import com.swg.core.service.VoteObserverPagedList;
+import com.swg.core.service.support.BasePagedList;
 
 /**
  * Proxy object untuk {@link BasePagedList} untuk client berbasis gwt.

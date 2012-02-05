@@ -1,5 +1,6 @@
 package com.swg.sms.entity.repo;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,8 @@ public interface OutboundMessageRepository extends JpaRepository<OutboundMessage
 	@Query(value="SELECT COUNT(i) FROM OutboundMessageBean AS i WHERE i.status = 1")
 	Long countNewMessages();
 	
-	List<OutboundMessage> findAllByStatus(int status);
+	List<OutboundMessage> findByStatus(int status);
+	
+	List<OutboundMessageBean> findByVersionGreaterThan(Date startVersion);
+	List<OutboundMessageBean> findByVersionBetween(Date startVersion, Date endVersion);
 }

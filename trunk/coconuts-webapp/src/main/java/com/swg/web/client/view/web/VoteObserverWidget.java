@@ -1,6 +1,7 @@
 package com.swg.web.client.view.web;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,7 +49,7 @@ import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent.Selecti
 import com.sencha.gxt.widget.core.client.toolbar.PagingToolBar;
 import com.sencha.gxt.widget.core.client.toolbar.SeparatorToolItem;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
-import com.swg.web.client.presenter.VoteObserverPresenter.View;
+import com.swg.web.client.presenter.impl.VoteObserverPresenter.VoteObserverView;
 import com.swg.web.shared.proxy.VoteObserverPagedListProxy;
 import com.swg.web.shared.proxy.VoteObserverProxy;
 import com.swg.web.shared.request.VoteObserverRequestFactory;
@@ -61,18 +62,14 @@ import com.swg.web.shared.request.VoteObserverRequestFactory.ManagementRequest;
  * 
  * @author zakyalvan
  */
-public class VoteObserverWidget implements View, SelectHandler, SelectionHandler<Item> {
+public class VoteObserverWidget implements VoteObserverView, SelectHandler, SelectionHandler<Item> {
 	interface ObserverProxyProperty extends PropertyAccess<VoteObserverProxy> {
 		ModelKeyProvider<VoteObserverProxy> id();
 		ValueProvider<VoteObserverProxy, String> fullName();
 		ValueProvider<VoteObserverProxy, String> cellularNumber();
 	}
 	
-	private final Logger logger = Logger.getLogger("ObserverListWidget");
-	
-	private static final String DELETE_BUTTON_ID = "delete-button";
-	private static final String ADD_BUTTON_ID = "add-button";
-	private static final String UPLOAD_BUTTON_ID = "upload-button";
+	private final Logger logger = Logger.getLogger("VoteObserverWidget");
 	
 	private EventBus eventBus;
 	private VoteObserverRequestFactory requestFactory;
@@ -281,5 +278,41 @@ public class VoteObserverWidget implements View, SelectHandler, SelectionHandler
 	public void configureTab(TabItemConfig config) {
 		config.setText("Data Pemantau");
 		config.setClosable(false);
+	}
+
+	@Override
+	public boolean isAutoreloadEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAutoreloadPartial() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Date getLastDataVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDatas(List<VoteObserverProxy> datas) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDatas(List<VoteObserverProxy> datas, boolean partial) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clearDatas() {
+		// TODO Auto-generated method stub
+		
 	}
 }

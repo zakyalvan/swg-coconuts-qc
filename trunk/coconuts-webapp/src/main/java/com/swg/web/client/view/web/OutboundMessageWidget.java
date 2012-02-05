@@ -20,6 +20,7 @@ import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.widget.core.client.TabItemConfig;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
+import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.grid.CheckBoxSelectionModel;
@@ -31,6 +32,7 @@ import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
 import com.sencha.gxt.widget.core.client.menu.SeparatorMenuItem;
+import com.sencha.gxt.widget.core.client.tips.QuickTip;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
 import com.swg.web.client.presenter.impl.OutboundMessagePresenter.OutboundMessageView;
 import com.swg.web.shared.proxy.OutboundMessageProxy;
@@ -42,7 +44,9 @@ public class OutboundMessageWidget implements OutboundMessageView, SelectHandler
 		ValueProvider<OutboundMessageProxy, Integer> id();
 		ValueProvider<OutboundMessageProxy, String> content();
 		ValueProvider<OutboundMessageProxy, String> recipient();
+		ValueProvider<OutboundMessageProxy, Date> createDate();
 		ValueProvider<OutboundMessageProxy, Integer> status();
+		ValueProvider<OutboundMessageProxy, Date> sentDate();
 	}
 	
 	private Logger logger = Logger.getLogger("OutboundMessageWidget");
@@ -51,7 +55,7 @@ public class OutboundMessageWidget implements OutboundMessageView, SelectHandler
 	private VerticalLayoutContainer widget;
 	
 	private boolean autoreloadEnabled = true;
-	private boolean autoreloadPartial = false;
+	private boolean autoreloadPartial = true;
 	private Date lastDataVersion;
 	
 	private ListStore<OutboundMessageProxy> dataStore;
@@ -66,10 +70,10 @@ public class OutboundMessageWidget implements OutboundMessageView, SelectHandler
 		
 		widget = new VerticalLayoutContainer();
 		
-		widget.add(createToolBar());
+		widget.add(createToolBar(), new VerticalLayoutData(1, -1));
 		
 		configureDataGrid();
-		widget.add(dataGrid);
+		widget.add(dataGrid, new VerticalLayoutData(1, 1));
 	}
 	
 	@Override
@@ -145,6 +149,9 @@ public class OutboundMessageWidget implements OutboundMessageView, SelectHandler
 		if(event.getSelectedItem().getId().equals(AUTORELOAD_TRIGGER_ID)) {
 			autoreloadEnabled = ((CheckMenuItem) event.getSelectedItem()).isChecked();
 		}
+		else if(event.getSelectedItem().getId().equals(PARTIAL_RELOAD_TRIGGER_ID)) {
+			autoreloadPartial = ((CheckMenuItem) event.getSelectedItem()).isChecked();
+		}
 		else if(event.getSelectedItem().getId().equals(AUTORELOAD_TRIGGER_ID)) {
 			// Do reload here (or publish reload request event).
 		}
@@ -174,8 +181,14 @@ public class OutboundMessageWidget implements OutboundMessageView, SelectHandler
 		CheckMenuItem autoReloadMenuItem = new CheckMenuItem("Muat Ulang Automatis");
 		autoReloadMenuItem.setId(AUTORELOAD_TRIGGER_ID);
 		autoReloadMenuItem.addSelectionHandler(this);
-		autoReloadMenuItem.setChecked(true);
+		autoReloadMenuItem.setChecked(autoreloadPartial);
 		settingMenu.add(autoReloadMenuItem);
+		
+		CheckMenuItem partialReloadMenuItem = new CheckMenuItem("Muat Ulang Parsial");
+		partialReloadMenuItem.setId(PARTIAL_RELOAD_TRIGGER_ID);
+		partialReloadMenuItem.addSelectionHandler(this);
+		partialReloadMenuItem.setChecked(autoreloadPartial);
+		settingMenu.add(partialReloadMenuItem);
 		
 		MenuItem reloadMenuItem = new MenuItem("Muat Ulang Data");
 		reloadMenuItem.setId(RELOAD_TRIGGER_ID);
@@ -195,8 +208,11 @@ public class OutboundMessageWidget implements OutboundMessageView, SelectHandler
 		dataStore = new ListStore<OutboundMessageProxy>(propertyAccess.key());
 		
 		ColumnConfig<OutboundMessageProxy, String> contentColumn = new ColumnConfig<OutboundMessageProxy, String>(propertyAccess.content(), 100, "Isi Pesan");
-		ColumnConfig<OutboundMessageProxy, String> recipientColumn = new ColumnConfig<OutboundMessageProxy, String>(propertyAccess.recipient(), 50, "Tujuan");
-		ColumnConfig<OutboundMessageProxy, Integer> statusColumn = new ColumnConfig<OutboundMessageProxy, Integer>(propertyAccess.status(), 50, "Status Pesan");
+		ColumnConfig<OutboundMessageProxy, String> recipientColumn = new ColumnConfig<OutboundMessageProxy, String>(propertyAccess.recipient(), 20, "Tujuan");
+		ColumnConfig<OutboundMessageProxy, Date> createDateColumn = new ColumnConfig<OutboundMessageProxy, Date>(propertyAccess.createDate(), 20, "Waktu Buat");
+		ColumnConfig<OutboundMessageProxy, Integer> statusColumn = new ColumnConfig<OutboundMessageProxy, Integer>(propertyAccess.status(), 20, "Status Pesan");
+		ColumnConfig<OutboundMessageProxy, Date> sentDateColumn = new ColumnConfig<OutboundMessageProxy, Date>(propertyAccess.sentDate(), 20, "Waktu Terkirim");
+		
 		
 		selectionModel = new CheckBoxSelectionModel<OutboundMessageProxy>(new IdentityValueProvider<OutboundMessageProxy>());
 		
@@ -204,7 +220,9 @@ public class OutboundMessageWidget implements OutboundMessageView, SelectHandler
 		columnsConfig.add(selectionModel.getColumn());
 		columnsConfig.add(recipientColumn);
 		columnsConfig.add(contentColumn);
+		columnsConfig.add(createDateColumn);
 		columnsConfig.add(statusColumn);
+		columnsConfig.add(sentDateColumn);
 		
 		ColumnModel<OutboundMessageProxy> columnModel = new ColumnModel<OutboundMessageProxy>(columnsConfig);
 		
@@ -213,6 +231,11 @@ public class OutboundMessageWidget implements OutboundMessageView, SelectHandler
 		dataGrid.setLoadMask(true);
 		dataGrid.getView().setAutoExpandColumn(contentColumn);
 		dataGrid.getView().setAutoFill(true);
+		dataGrid.getView().setForceFit(true);
 		dataGrid.getView().setEmptyText("Data pesan keluar tidak ditemukan dalam basis data system.");
+		
+		// needed to enable quicktips (qtitle for the heading and qtip for the
+	    // content) that are setup in the change GridCellRenderer
+	    new QuickTip(dataGrid);
 	}
 }

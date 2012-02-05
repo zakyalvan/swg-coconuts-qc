@@ -1,8 +1,9 @@
-package com.swg.core.service;
+package com.swg.core.service.support;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 
 /**
  * Implementasi default dari {@link PagedList}.

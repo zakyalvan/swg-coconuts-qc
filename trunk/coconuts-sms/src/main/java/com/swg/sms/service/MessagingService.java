@@ -2,11 +2,14 @@ package com.swg.sms.service;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.smslib.AGateway;
+import org.smslib.AGateway.GatewayStatuses;
 import org.smslib.GatewayException;
+import org.smslib.IGatewayStatusNotification;
 import org.smslib.IInboundMessageNotification;
 import org.smslib.IOutboundMessageNotification;
 import org.smslib.Message.MessageTypes;
@@ -21,6 +24,7 @@ import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.swg.core.service.support.PagedList;
 import com.swg.sms.entity.InboundMessage;
 import com.swg.sms.entity.InboundMessageBean;
 import com.swg.sms.entity.OutboundMessage;
@@ -36,7 +40,12 @@ import com.swg.sms.processor.MessageProcessor;
  * @author zakyalvan
  */
 @Service
-public class MessagingService implements MessageProcessingService, ServiceLifecycleManager, InitializingBean, ApplicationEventPublisherAware {
+public class MessagingService implements OutboundMessageListProvider, 
+		MessageProcessingService, 
+		ServiceLifecycleManager, 
+		InitializingBean, 
+		ApplicationEventPublisherAware {
+	
 	private Logger logger = Logger.getLogger(MessagingService.class);
 	
 	private org.smslib.Service service = org.smslib.Service.getInstance();
@@ -135,7 +144,7 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 		this.processMessage(outboundMessage, false);
 	}
 	
-	@Scheduled(fixedDelay=60000)
+	@Scheduled(fixedDelay=20000)
 	synchronized void checkAndProcessInboundMessage() {
 		logger.info("Check and process inbound message.");
 		
@@ -148,11 +157,11 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 			}
 		}
 	}
-	@Scheduled(fixedDelay=60000)
+	@Scheduled(fixedDelay=20000)
 	synchronized void checkAndProcessOutboundMessage() {
 		logger.info("Check and process outbound message.");
 		if(outboundMessageRepository.countNewMessages() > 0) {
-			List<OutboundMessage> outboundMessages = outboundMessageRepository.findAllByStatus(OutboundMessage.NEW_MESSAGE);
+			List<OutboundMessage> outboundMessages = outboundMessageRepository.findByStatus(OutboundMessage.NEW_MESSAGE);
 			logger.info("Found " + outboundMessages.size() + " item(s) pesan keluar baru untuk dikirim.");
 			for(OutboundMessage outboundMessage : outboundMessages) {
 				processMessage(outboundMessage);
@@ -196,6 +205,28 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 			e.printStackTrace();
 		}
 	}
+	
+	
+	@Override
+	public List<OutboundMessageBean> getList(Date startVersion) {
+		logger.info("Load outbound message list (with version start from : " + startVersion + ")");
+		return outboundMessageRepository.findByVersionGreaterThan(startVersion);
+	}
+	@Override
+	public List<OutboundMessageBean> getList(Date startVersion, Date endVersion) {
+		logger.info("Load outbound message list (with version start from : " + startVersion + " to "+ endVersion +")");
+		return outboundMessageRepository.findByVersionBetween(startVersion, endVersion);
+	}
+	@Override
+	public List<OutboundMessageBean> getList() {
+		logger.info("Load all outbound message list");
+		return outboundMessageRepository.findAll();
+	}
+	@Override
+	public PagedList<OutboundMessageBean> getPagedList(Integer page, Integer size) {
+		return null;
+	}
+	
 	
 	private class InboundMessageNotification implements IInboundMessageNotification {
 		private Logger logger = Logger.getLogger(InboundMessageNotification.class);
@@ -241,12 +272,19 @@ public class MessagingService implements MessageProcessingService, ServiceLifecy
 			outboundMessageRepository.save(newOutboundMessage);
 		}
 	}
-	
+	private class GatewayStatusNotification implements IGatewayStatusNotification {
+		private Logger logger = Logger.getLogger(getClass());
+		@Override
+		public void process(AGateway gateway, GatewayStatuses oldGatewayStatuses, GatewayStatuses newGatewayStatuses) {
+			logger.info("Proses gateway status notification.");
+		}
+	}
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		logger.info("Set inbound dan outbound notification ke service.");
 		service.setInboundMessageNotification(new InboundMessageNotification());
 		service.setOutboundMessageNotification(new OutboundMessageNotification());
+		service.setGatewayStatusNotification(new GatewayStatusNotification());
 	}
 	@Override
 	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {	

@@ -17,6 +17,8 @@ import com.swg.web.client.ioc.ClientFactory;
 import com.swg.web.client.place.MainPlace;
 import com.swg.web.client.presenter.impl.InboundMessagePresenter;
 import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
+import com.swg.web.client.presenter.impl.VoteCountingPresenter;
+import com.swg.web.client.presenter.impl.VoteRecapitulatePresenter;
 
 public class CoconutsShell extends BorderLayoutContainer {	
 	private ClientFactory clientFactory;
@@ -49,6 +51,27 @@ public class CoconutsShell extends BorderLayoutContainer {
 		mainMenu.add(dashboardMenuItem);
 		mainBarItem.setMenu(mainMenu);
 		menuBar.add(mainBarItem);
+		
+		MenuBarItem voteBarItem = new MenuBarItem("Perhitungan");
+		Menu voteMenu = new Menu();
+		MenuItem voteCountingMenuItem = new MenuItem("Rincian Perolehan Suara");
+		voteCountingMenuItem.addSelectionHandler(new SelectionHandler<Item>() {
+			@Override
+			public void onSelection(SelectionEvent<Item> event) {
+				placeController.goTo(new MainPlace(VoteCountingPresenter.NAME));
+			}
+		});
+		voteMenu.add(voteCountingMenuItem);
+		MenuItem voteRecapMenuItem = new MenuItem("Rekapitulasi Suara");
+		voteRecapMenuItem.addSelectionHandler(new SelectionHandler<Item>() {
+			@Override
+			public void onSelection(SelectionEvent<Item> event) {
+				placeController.goTo(new MainPlace(VoteRecapitulatePresenter.NAME));
+			}
+		});
+		voteMenu.add(voteRecapMenuItem);
+		voteBarItem.setMenu(voteMenu);
+		menuBar.add(voteBarItem);
 		
 		MenuBarItem messageBarItem = new MenuBarItem("Kotak Pesan");
 		Menu messageMenu = new Menu();

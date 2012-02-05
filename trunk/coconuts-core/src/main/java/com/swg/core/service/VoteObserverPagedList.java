@@ -3,6 +3,7 @@ package com.swg.core.service;
 import java.util.List;
 
 import com.swg.core.entity.VoteObserver;
+import com.swg.core.service.support.BasePagedList;
 
 public class VoteObserverPagedList extends BasePagedList<VoteObserver> {
 	private static final long serialVersionUID = -699131429051587523L;

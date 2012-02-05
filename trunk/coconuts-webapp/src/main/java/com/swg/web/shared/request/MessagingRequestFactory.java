@@ -1,11 +1,15 @@
 package com.swg.web.shared.request;
 
+import java.util.Date;
+import java.util.List;
+
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.swg.sms.entity.repo.InboundMessageRepository;
 import com.swg.sms.service.MessageProcessingService;
+import com.swg.sms.service.OutboundMessageListProvider;
 import com.swg.sms.service.ServiceLifecycleManager;
 import com.swg.web.server.ApplicationServiceLocator;
 import com.swg.web.shared.proxy.InboundMessageProxy;
@@ -32,6 +36,13 @@ public interface MessagingRequestFactory extends RequestFactory {
 		Request<Void> processMessage(OutboundMessageProxy outboundMessage);
 	}
 	
+	@Service(value=OutboundMessageListProvider.class, locator=ApplicationServiceLocator.class)
+	public interface OutboundMessageListRequest extends RequestContext {
+		Request<List<OutboundMessageProxy>> getList();
+		Request<List<OutboundMessageProxy>> getList(Date startVersion);
+		Request<List<OutboundMessageProxy>> getList(Date startVersion, Date endVersion);
+	}
+	
 	@Service(value=InboundMessageRepository.class, locator=ApplicationServiceLocator.class)
 	public interface InboundMessageRepositoryRequest extends RequestContext {
 		
@@ -39,5 +50,6 @@ public interface MessagingRequestFactory extends RequestFactory {
 	
 	public ServiceLifecycleRequest getServiceLifecycleRequest();
 	public MessageProcessingRequest getMessageProcessingRequest();
+	public OutboundMessageListRequest getOutboundMessageListRequest();
 	public InboundMessageRepositoryRequest getInboundMessageRepositoryRequest();
 }
