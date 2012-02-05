@@ -40,12 +40,12 @@ public class OutboundMessageBean implements OutboundMessage {
 	
 	@NotNull
 	@Column(name="status", length=1)
-	private Integer status;
+	private Integer status = OutboundMessage.NEW_MESSAGE;
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="create_date")
-	private Date createDate;
+	private Date createDate = new Date();
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="sent_date")
@@ -58,10 +58,7 @@ public class OutboundMessageBean implements OutboundMessage {
 	public OutboundMessageBean() {}
 	public OutboundMessageBean(String recipient, String content) {
 		this.recipient = recipient;
-		this.content = content;
-		this.status = OutboundMessage.NEW_MESSAGE;
-		this.createDate = new Date();
-		
+		this.content = content;		
 	}
 	
 	@Override
@@ -81,11 +78,18 @@ public class OutboundMessageBean implements OutboundMessage {
 	public String getRecipient() {
 		return recipient;
 	}
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
 	
 	@Override
 	public String getContent() {
 		return content;
 	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
 	@Override
 	public int getStatus() {
 		return status;
