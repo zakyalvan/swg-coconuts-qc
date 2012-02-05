@@ -5,7 +5,7 @@ import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.swg.core.service.SecurityService;
-import com.swg.web.shared.ApplicationServiceLocator;
+import com.swg.web.server.ApplicationServiceLocator;
 
 public interface SecurityRequestFactory extends RequestFactory {
 	@Service(value=SecurityService.class, locator=ApplicationServiceLocator.class)

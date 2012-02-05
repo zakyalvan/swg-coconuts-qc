@@ -7,7 +7,7 @@ import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.swg.core.service.VoteObserverManager;
-import com.swg.web.shared.ApplicationServiceLocator;
+import com.swg.web.server.ApplicationServiceLocator;
 import com.swg.web.shared.proxy.VoteObserverPagedListProxy;
 import com.swg.web.shared.proxy.VoteObserverProxy;
 
