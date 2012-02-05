@@ -51,4 +51,6 @@
     
     <jpa:repositories base-package="com.swg.core" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager">
 	</jpa:repositories>
+	
+	
 </beans>
