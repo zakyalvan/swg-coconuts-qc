@@ -6,7 +6,7 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.Service;
 import com.swg.sms.entity.repo.InboundMessageRepository;
 import com.swg.sms.service.ServiceLifecycleManager;
-import com.swg.web.shared.ApplicationServiceLocator;
+import com.swg.web.server.ApplicationServiceLocator;
 
 /**
  * Request factory untuk urusan manajemen pesan.

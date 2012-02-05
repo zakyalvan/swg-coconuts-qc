@@ -5,7 +5,7 @@ import java.util.Date;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.swg.core.entity.VoteObserver;
-import com.swg.web.shared.proxy.locator.VoteObserverLocator;
+import com.swg.web.server.entity.locator.VoteObserverLocator;
 
 /**
  * Client (gwt) object proxy untuk entity object {@link VoteObserver}.

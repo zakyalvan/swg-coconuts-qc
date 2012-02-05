@@ -6,7 +6,7 @@ import java.util.Date;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.swg.sms.entity.InboundMessageBean;
-import com.swg.web.shared.proxy.locator.InboundMessageLocator;
+import com.swg.web.server.entity.locator.InboundMessageLocator;
 
 @ProxyFor(value=InboundMessageBean.class, locator=InboundMessageLocator.class)
 public interface InboundMessageProxy extends EntityProxy, Serializable {

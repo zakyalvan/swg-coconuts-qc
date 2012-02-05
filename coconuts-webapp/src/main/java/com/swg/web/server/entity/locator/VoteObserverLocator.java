@@ -1,4 +1,4 @@
-package com.swg.web.shared.proxy.locator;
+package com.swg.web.server.entity.locator;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

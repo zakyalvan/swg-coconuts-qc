@@ -1,4 +1,4 @@
-package com.swg.web.shared;
+package com.swg.web.server;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;

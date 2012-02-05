@@ -1,4 +1,4 @@
-package com.swg.web.shared.aspect;
+package com.swg.web.server.aspect;
 
 /**
  * Aspect yang mentranslasi service exception ke exception yang 
