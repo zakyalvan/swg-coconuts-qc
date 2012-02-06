@@ -13,12 +13,16 @@ import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.swg.web.client.CoconutsApplication;
 import com.swg.web.client.CoconutsShell;
 import com.swg.web.client.activity.MainActivity;
+import com.swg.web.client.activity.ReportingActivity;
 import com.swg.web.client.mvp.CoconutsActivityMapper;
 import com.swg.web.client.presenter.MainPresenter.MainView;
+import com.swg.web.client.presenter.ReportingPresenter.ReportingView;
 import com.swg.web.client.presenter.SmsServiceSettingPresenter;
 import com.swg.web.client.presenter.impl.DashBoardPresenter;
 import com.swg.web.client.presenter.impl.InboundMessagePresenter;
 import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
+import com.swg.web.client.presenter.impl.SiteReportPresenter;
+import com.swg.web.client.presenter.impl.SmsServicePresenter;
 import com.swg.web.client.presenter.impl.VoteCountingPresenter;
 import com.swg.web.client.presenter.impl.VoteObserverPresenter;
 import com.swg.web.client.presenter.impl.VoteRecapitulatePresenter;
@@ -26,10 +30,13 @@ import com.swg.web.client.presenter.util.DumbMainItemPresenterMapper;
 import com.swg.web.client.presenter.util.MainItemPresenterMapper;
 import com.swg.web.client.view.GlobalWidgetTimer;
 import com.swg.web.client.view.MainViewImpl;
+import com.swg.web.client.view.ReportingViewImpl;
 import com.swg.web.client.view.web.DashBoardWidget;
 import com.swg.web.client.view.web.InboundMessageWidget;
 import com.swg.web.client.view.web.OutboundMessageWidget;
+import com.swg.web.client.view.web.SiteReportWidget;
 import com.swg.web.client.view.web.SmsServiceSettingWidget;
+import com.swg.web.client.view.web.SmsServiceWidget;
 import com.swg.web.client.view.web.VoteCountingWidget;
 import com.swg.web.client.view.web.VoteObserverWidget;
 import com.swg.web.client.view.web.VoteRecapitulateWidget;
@@ -63,6 +70,9 @@ public class CoconutsModule extends AbstractGinModule {
 		bind(MainView.class).to(MainViewImpl.class).in(Singleton.class);
 		bind(MainActivity.class);
 		
+		bind(ReportingView.class).to(ReportingViewImpl.class).in(Singleton.class);
+		bind(ReportingActivity.class);
+		
 		bind(SecurityRequestFactory.class).toProvider(SecurityRequestFactoryProvider.class).in(Singleton.class);
 		bind(BaseRequestFactory.class).toProvider(BaseRequestFactoryProvider.class).in(Singleton.class);
 		bind(VoteObserverRequestFactory.class).toProvider(VoteObserverRequestFactoryProvider.class).in(Singleton.class);
@@ -87,6 +97,12 @@ public class CoconutsModule extends AbstractGinModule {
 		
 		bind(VoteObserverPresenter.VoteObserverView.class).to(VoteObserverWidget.class).in(Singleton.class);
 		bind(VoteObserverPresenter.class).in(Singleton.class);
+		
+		bind(SiteReportPresenter.SiteReportView.class).to(SiteReportWidget.class).in(Singleton.class);
+		bind(SiteReportPresenter.class).in(Singleton.class);
+		
+		bind(SmsServicePresenter.SmsServiceView.class).to(SmsServiceWidget.class).in(Singleton.class);
+		bind(SmsServicePresenter.class).in(Singleton.class);
 		
 		bind(SmsServiceSettingPresenter.View.class).to(SmsServiceSettingWidget.class).in(Singleton.class);
 	}

@@ -2,7 +2,7 @@ package com.swg.core.service;
 
 import java.util.List;
 
-import com.swg.core.entity.VoteObserver;
+import com.swg.core.entity.VoteObserverBean;
 
 /**
  * Kontrak untuk service atau manager pemantau/saksi pemungutan suara.
@@ -14,9 +14,9 @@ public interface VoteObserverManager {
 	 * Hapus satu entity vote observer.
 	 * Seharusnya tidak menghapus data secara fisik dari basis data.
 	 * 
-	 * @param {@link VoteObserver} entity
+	 * @param {@link VoteObserverBean} entity
 	 */
-	void delete(VoteObserver entity);
+	void delete(VoteObserverBean entity);
 	
 	/**
 	 * Hapus beberapa entity pemantau atau saksi.
@@ -24,7 +24,7 @@ public interface VoteObserverManager {
 	 * 
 	 * @param entities
 	 */
-	void delete(List<VoteObserver> entities);
+	void delete(List<VoteObserverBean> entities);
 	
 	/**
 	 * Hitung jumlah pemantau/saksi pemungutan suara yang tercatat dalam basis data system.
@@ -38,7 +38,7 @@ public interface VoteObserverManager {
 	 * 
 	 * @return
 	 */
-	List<VoteObserver> listVoteObservers();
+	List<VoteObserverBean> listVoteObservers();
 	
 	/**
 	 * List pemantau/saksi pemungutan suara yang tercatat dalam basis data system

@@ -1,8 +1,8 @@
 package com.swg.core.initiator.mapper;
 
-import com.swg.core.entity.VoteObserver;
+import com.swg.core.entity.VoteObserverBean;
 
-public interface VoteObserverEntityMapper extends EntityMapper<VoteObserver> {
+public interface VoteObserverEntityMapper extends EntityMapper<VoteObserverBean> {
 
 	
 

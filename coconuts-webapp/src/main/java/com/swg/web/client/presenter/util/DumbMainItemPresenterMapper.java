@@ -8,7 +8,10 @@ import com.swg.web.client.presenter.MainItemPresenter;
 import com.swg.web.client.presenter.impl.DashBoardPresenter;
 import com.swg.web.client.presenter.impl.InboundMessagePresenter;
 import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
+import com.swg.web.client.presenter.impl.SiteReportPresenter;
+import com.swg.web.client.presenter.impl.SmsServicePresenter;
 import com.swg.web.client.presenter.impl.VoteCountingPresenter;
+import com.swg.web.client.presenter.impl.VoteObserverPresenter;
 import com.swg.web.client.presenter.impl.VoteRecapitulatePresenter;
 
 /**
@@ -24,9 +27,12 @@ public class DumbMainItemPresenterMapper extends MainItemPresenterMapper {
 	@Override
 	protected void configurePresenterMap(Map<String, MainItemPresenter<?>> map) {
 		map.put(DashBoardPresenter.NAME, clientFactory.getDashBoardPresenter());
+		map.put(VoteObserverPresenter.NAME, clientFactory.getVoteObserverPresenter());
 		map.put(VoteCountingPresenter.NAME, clientFactory.getVoteCountingPresenter());
 		map.put(VoteRecapitulatePresenter.NAME, clientFactory.getVoteRecapitulatePresenter());
 		map.put(InboundMessagePresenter.NAME, clientFactory.getInboundMessagePresenter());
 		map.put(OutboundMessagePresenter.NAME, clientFactory.getOutboundMessagePresenter());
+		map.put(SiteReportPresenter.NAME, clientFactory.getSiteReportPresenter());
+		map.put(SmsServicePresenter.NAME, clientFactory.getSmsServicePresenter());
 	}
 }
