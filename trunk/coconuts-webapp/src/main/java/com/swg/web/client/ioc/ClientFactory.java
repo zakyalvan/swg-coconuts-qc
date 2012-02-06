@@ -9,17 +9,22 @@ import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.swg.web.client.CoconutsApplication;
 import com.swg.web.client.CoconutsShell;
 import com.swg.web.client.activity.MainActivity;
+import com.swg.web.client.activity.ReportingActivity;
 import com.swg.web.client.activity.SmsServiceSettingActivity;
 import com.swg.web.client.presenter.MainPresenter.MainView;
-import com.swg.web.client.presenter.SmsServicePresenter;
-import com.swg.web.client.presenter.SmsServicePresenter.View;
+import com.swg.web.client.presenter.ReportingPresenter.ReportingView;
 import com.swg.web.client.presenter.SmsServiceSettingPresenter;
+import com.swg.web.client.presenter.SmsServiceSettingPresenter.View;
 import com.swg.web.client.presenter.impl.DashBoardPresenter;
 import com.swg.web.client.presenter.impl.DashBoardPresenter.DashBoardView;
 import com.swg.web.client.presenter.impl.InboundMessagePresenter;
 import com.swg.web.client.presenter.impl.InboundMessagePresenter.InboundMessageView;
 import com.swg.web.client.presenter.impl.OutboundMessagePresenter;
 import com.swg.web.client.presenter.impl.OutboundMessagePresenter.OutboundMessageView;
+import com.swg.web.client.presenter.impl.SiteReportPresenter;
+import com.swg.web.client.presenter.impl.SiteReportPresenter.SiteReportView;
+import com.swg.web.client.presenter.impl.SmsServicePresenter;
+import com.swg.web.client.presenter.impl.SmsServicePresenter.SmsServiceView;
 import com.swg.web.client.presenter.impl.VoteCountingPresenter;
 import com.swg.web.client.presenter.impl.VoteCountingPresenter.VoteCountingView;
 import com.swg.web.client.presenter.impl.VoteObserverPresenter;
@@ -52,6 +57,9 @@ public interface ClientFactory extends Ginjector {
 	MainView getMainView();
 	MainActivity getMainActivity();
 	
+	ReportingView getReportingView();
+	ReportingActivity getReportingActivity();
+	
 	MainItemPresenterMapper getMainItemPresenterMapper();
 	
 	EventBus getEventBus();
@@ -76,6 +84,17 @@ public interface ClientFactory extends Ginjector {
 	
 	VoteObserverView getVoteObserverView();
 	VoteObserverPresenter getVoteObserverPresenter();
+	
+	SiteReportView getSiteReportView();
+	SiteReportPresenter getSiteReportPresenter();
+	
+	/**
+	 * Retrieve view untuk manajemen service perpesanan.
+	 * 
+	 * @return {@link View}
+	 */
+	SmsServiceView getSmsServiceView();
+	SmsServicePresenter getSmsServicePresenter();
 	
 	/**
 	 * Retrieve initialized base request factory.
@@ -106,12 +125,7 @@ public interface ClientFactory extends Ginjector {
 	MessagingRequestFactory getMessagingRequestFactory();
 		
 	
-	/**
-	 * Retrieve view untuk manajemen service perpesanan.
-	 * 
-	 * @return {@link View}
-	 */
-	SmsServicePresenter.View getMessagingServiceView();
+	
 	
 	
 	SmsServiceSettingPresenter.View getSmsServiceSettingView();

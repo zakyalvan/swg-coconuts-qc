@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.google.web.bindery.requestfactory.shared.Locator;
-import com.swg.core.entity.VoteObserver;
+import com.swg.core.entity.VoteObserverBean;
 import com.swg.core.entity.repo.VoteObserverRepository;
 
 /**
@@ -19,28 +19,28 @@ import com.swg.core.entity.repo.VoteObserverRepository;
 @Component
 @Configurable(dependencyCheck=true)
 @Scope("prototype")
-public class VoteObserverLocator extends Locator<VoteObserver, Integer> {
+public class VoteObserverLocator extends Locator<VoteObserverBean, Integer> {
 	private Logger logger = Logger.getLogger(getClass());
 	
 	@Autowired(required=true)
 	private VoteObserverRepository repository;
 	
 	@Override
-	public VoteObserver create(Class<? extends VoteObserver> clazz) {
+	public VoteObserverBean create(Class<? extends VoteObserverBean> clazz) {
 		logger.debug("Create new observer.");
-		return new VoteObserver();
+		return new VoteObserverBean();
 	}
 	@Override
-	public VoteObserver find(Class<? extends VoteObserver> clazz, Integer id) {
+	public VoteObserverBean find(Class<? extends VoteObserverBean> clazz, Integer id) {
 		logger.debug("");
 		return repository.findOne(id);
 	}
 	@Override
-	public Class<VoteObserver> getDomainType() {
-		return VoteObserver.class;
+	public Class<VoteObserverBean> getDomainType() {
+		return VoteObserverBean.class;
 	}
 	@Override
-	public Integer getId(VoteObserver domainObject) {
+	public Integer getId(VoteObserverBean domainObject) {
 		return domainObject.getId();
 	}
 	@Override
@@ -48,7 +48,7 @@ public class VoteObserverLocator extends Locator<VoteObserver, Integer> {
 		return Integer.class;
 	}
 	@Override
-	public Object getVersion(VoteObserver domainObject) {
+	public Object getVersion(VoteObserverBean domainObject) {
 		return domainObject.getVersion();
 	}
 }

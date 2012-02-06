@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.swg.core.entity.VoteObserver;
+import com.swg.core.entity.VoteObserverBean;
 import com.swg.core.entity.repo.VoteObserverRepository;
 
 /**
@@ -25,16 +25,16 @@ public class VoteObserverManagerImpl implements VoteObserverManager {
 	private VoteObserverRepository repository;
 	
 	@Override
-	public void delete(VoteObserver entity) {
-		List<VoteObserver> willBeDeleted = new ArrayList<VoteObserver>();
+	public void delete(VoteObserverBean entity) {
+		List<VoteObserverBean> willBeDeleted = new ArrayList<VoteObserverBean>();
 		willBeDeleted.add(entity);
 		delete(willBeDeleted);
 	}
 
 	@Override
-	public void delete(List<VoteObserver> entities) {
+	public void delete(List<VoteObserverBean> entities) {
 		logger.debug("Hapus data pemantau atau saksi. Sebenarnya tidak menghapus data secara fisik dari basis data.");
-		for(VoteObserver entity : entities) {
+		for(VoteObserverBean entity : entities) {
 			entity.setDeleted(true);
 		}
 		repository.save(entities);
@@ -47,9 +47,9 @@ public class VoteObserverManagerImpl implements VoteObserverManager {
 	}
 
 	@Override
-	public List<VoteObserver> listVoteObservers() {
+	public List<VoteObserverBean> listVoteObservers() {
 		logger.debug("List seluruh pemantau atau saksi pemungutan suara yang tercatat.");
-		return new ArrayList<VoteObserver>(repository.findAll());
+		return new ArrayList<VoteObserverBean>(repository.findAll());
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class VoteObserverManagerImpl implements VoteObserverManager {
 		logger.debug("List pemantau atau saksi pemungutan suara yang tercatat mulai dari record #offset sebanyak #limit record.");
 		
 		Integer page = (int) Math.ceil(offset/limit);
-		Page<VoteObserver> paged = repository.findAll(new PageRequest(page, limit));
+		Page<VoteObserverBean> paged = repository.findAll(new PageRequest(page, limit));
 		
 		return new VoteObserverPagedList(paged.getContent(), 
 				paged.getNumber(), 
