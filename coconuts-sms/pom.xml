@@ -1,39 +1,26 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<artifactId>coconuts</artifactId>
-		<groupId>com.swg</groupId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
-	<artifactId>coconuts-sms</artifactId>
-	<name>Coconuts Sms Module</name>
-	
-	<dependencies>
-		<!-- Dependency ke modul internal dalam project -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>coconuts-core</artifactId>
-		</dependency>
-		
-		<!-- Dependency ke sms lib (Yang bekerja keras urusan sms :D) -->
-		<dependency>
-        	<groupId>org.smslib</groupId>
-        	<artifactId>smslib</artifactId>
-        	<version>3.5.1</version>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>coconuts</artifactId>
+        <groupId>com.swg</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>coconuts-sms</artifactId>
+    <name>Coconuts Sms Module</name>
+
+    <dependencies>
+        <!-- Dependency ke modul internal dalam project -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>coconuts-core</artifactId>
         </dependency>
-	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-		</plugins>
-	</build>
+
+        <!-- Dependency ke sms lib (Yang bekerja keras urusan sms :D) -->
+        <dependency>
+            <groupId>org.smslib</groupId>
+            <artifactId>smslib</artifactId>
+            <version>3.5.4</version>
+        </dependency>
+    </dependencies>
 </project>

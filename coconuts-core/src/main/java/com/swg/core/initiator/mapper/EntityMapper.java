@@ -1,15 +1,14 @@
 /**
- * 
+ *
  */
 package com.swg.core.initiator.mapper;
 
 
 /**
  * @author satriaprayoga
- *
  */
 public interface EntityMapper<T> {
-	
-	public T mapFromExtern(Object data);
+
+    public T mapFromExtern(Object data);
 
 }

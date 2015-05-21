@@ -4,23 +4,27 @@ import java.io.Serializable;
 import java.util.Date;
 
 public interface VoteObserver extends Serializable {
-	Integer getId();
-	
-	String getFullName();
+    Integer getId();
 
-	String getCellularNumber();
-	void setCellularNumber(String cellularNumber);
+    String getFullName();
 
-	Date getRegisteredDate();
-	void setRegisteredDate(Date registeredDate);
+    String getCellularNumber();
 
-	boolean isVerified();
-	void setVerified(boolean verified);
+    void setCellularNumber(String cellularNumber);
 
-	Date getVerifiedDate();
+    Date getRegisteredDate();
 
-	boolean isDeleted();
-	void setDeleted(boolean deleted);
-	
-	Date getVersion();
+    void setRegisteredDate(Date registeredDate);
+
+    boolean isVerified();
+
+    void setVerified(boolean verified);
+
+    Date getVerifiedDate();
+
+    boolean isDeleted();
+
+    void setDeleted(boolean deleted);
+
+    Date getVersion();
 }

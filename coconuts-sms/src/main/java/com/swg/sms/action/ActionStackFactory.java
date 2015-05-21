@@ -9,26 +9,27 @@ import org.springframework.stereotype.Component;
 /**
  * Factory untuk object {@link ActionStack} yang mencreate fresh action stack
  * setiap kali {@link #create()} dipanggil.
- * 
+ *
  * @author zakyalvan
  */
 @Component
 public class ActionStackFactory implements ApplicationContextAware {
-	private Logger logger = Logger.getLogger(getClass());
-	private ApplicationContext applicationContext;
-	
-	public ActionStack create(boolean allowZeroAction) {
-		logger.info("Create action stack. Stack with zero action allowed? " + allowZeroAction);
-		ActionStack actionStack = new ActionStack();
-		actionStack.refresh(applicationContext, allowZeroAction);
-		return actionStack;
-	}
-	public ActionStack create() {
-		return create(true);
-	}
+    private Logger logger = Logger.getLogger(getClass());
+    private ApplicationContext applicationContext;
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
+    public ActionStack create(boolean allowZeroAction) {
+        logger.info("Create action stack. Stack with zero action allowed? " + allowZeroAction);
+        ActionStack actionStack = new ActionStack();
+        actionStack.refresh(applicationContext, allowZeroAction);
+        return actionStack;
+    }
+
+    public ActionStack create() {
+        return create(true);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }

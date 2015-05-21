@@ -4,6 +4,5 @@ import com.swg.core.entity.VoteObserverBean;
 
 public interface VoteObserverEntityMapper extends EntityMapper<VoteObserverBean> {
 
-	
 
 }

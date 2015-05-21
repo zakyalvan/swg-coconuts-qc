@@ -1,8 +1,7 @@
 package com.swg.sms.processor;
 
-import org.springframework.stereotype.Component;
-
 import com.swg.sms.processor.MessageProcessingCallback.Default;
+import org.springframework.stereotype.Component;
 
 @Component
 public class DefaultMessageProcessorCallback extends Default {
